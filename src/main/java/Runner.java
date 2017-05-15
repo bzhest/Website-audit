@@ -17,8 +17,8 @@ public class Runner {
     public static List<String> sites = new ArrayList<String>();
 
     public Runner() {
-        sites.add("https://tools.pingdom.com/#!/AVVKP/http://www.theeuropeanmasters.com/");
-        sites.add("https://tools.pingdom.com/#!/XY9sK/http://www.inspectacargezina.co.za/");
+        sites.add("http://www.theeuropeanmasters.com/");
+        sites.add("http://www.inspectacargezina.co.za/");
     }
 
 
@@ -29,11 +29,19 @@ public class Runner {
         WebDriverWait wait = new WebDriverWait(driver, 20);
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
-        driver.get("https://tools.pingdom.com/#!/XY9sK/http://www.inspectacargezina.co.za/");
+        driver.get("https://tools.pingdom.com/#!/");
+        sites.add("http://www.theeuropeanmasters.com/");
+        sites.add("http://www.inspectacargezina.co.za/");
         PingdomPages pp = PageFactory.initElements(driver, PingdomPages.class);//new PingdomPages();
-        wait.until(ExpectedConditions.visibilityOf(pp.getLocationDropdownDiv()));
-        pp.clickOnLocationDropdown();
-        pp.clickOnLocationUSA();
+        for (String s:sites){
+            wait.until(ExpectedConditions.visibilityOf(pp.getLocationDropdownDiv()));
+            pp.inputText(pp.getUrlInput(), s);
+            pp.clickOnLocationDropdown();
+            pp.clickOnLocationUSA();
+            String performance = pp.getPerformanceGrade().getAttribute("textContent");//("innerHTML");
+        }
+
+
         /*WebDriver driver = new ChromeDriver();
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);

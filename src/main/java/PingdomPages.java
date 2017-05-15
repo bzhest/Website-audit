@@ -13,6 +13,12 @@ import java.util.List;
  */
 public class PingdomPages {
 
+    private String letterValue;
+    private String numberValue;
+    private String mbValue;
+    private String secValue;
+    private WebDriver driver;
+
     public PingdomPages(String letterValue, String numberValue, String mbValue, String secValue){
         this.letterValue = getLetterValue();
         this.numberValue = getNumberValue();
@@ -22,13 +28,14 @@ public class PingdomPages {
 
     public PingdomPages(){}
 
-    private String letterValue;
-    private String numberValue;
-    private String mbValue;
-    private String secValue;
-    private WebDriver driver;
 
-    @FindBy(how = How.CSS,using = ".rbc-summary-info-value .badge-grade.grade-b")
+
+    @FindBy(how = How.CSS,using = "#urlinput")
+
+
+    private WebElement urlInput;
+
+    @FindBy(how = How.CSS,using = ".rbc-summary-perfgrade .rbc-summary-info-value")
     private WebElement performanceGrade;
 
     @FindBy(how = How.CSS, using = ".rbc-summary-item.rbc-summary-pagesize .rbc-summary-info-value")
@@ -46,6 +53,8 @@ public class PingdomPages {
     @FindBy(how = How.CSS,using = "li[data-country = 'USA']")
     private List<WebElement> locationUSA;
 
+    //Methods------------------------------------------------------------------------------------
+
     public WebElement getLocationDropdownDiv() {
         return locationDropdownDiv.get(0);
     }
@@ -54,11 +63,17 @@ public class PingdomPages {
         return locationDropDownSelect;
     }
 
-
+    public WebElement getUrlInput() {return urlInput;}
+    public WebElement getPerformanceGrade() {return performanceGrade;}
 
     public static void selectByText(WebElement element, String text) {
         Select selectElement = new Select(element);
         selectElement.selectByVisibleText(text);
+    }
+
+    public void inputText(WebElement element, String text){
+        element.clear();
+        element.sendKeys(text);
     }
 
     public void clickOnLocationDropdown(){
