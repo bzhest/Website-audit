@@ -1,4 +1,6 @@
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.util.ArrayList;
@@ -38,17 +40,27 @@ public class Runner {
             pp.inputText(pp.getUrlInput(), s);
             pp.clickOnLocationDropdown();
             pp.clickOnLocationUSA();
-            String performance = pp.getPerformanceGrade().getAttribute("textContent");//("innerHTML");
+            pp.clickStartTest();
+            /*if (pp.getLinkTryAgain().isDisplayed()){
+                pp.getLinkTryAgain().click();
+            }*/
+            wait.until(ExpectedConditions.visibilityOf(pp.getPerformanceGrade()));
+            String performanceGrade = pp.getPerformanceGrade().getAttribute("textContent").replaceAll("\\D+","");//("innerHTML");
+            System.out.println(performanceGrade);
+            String pageSize = pp.getMb().getAttribute("textContent").replaceAll("[^0-9.]", "");
+            System.out.println(pageSize);
+             List <WebElement> partLoadings = pp.getSec().get(0).findElements(By.xpath(".//*"));
+            System.out.println(partLoadings.size());
+            int totalLoadingTime = 0;
+            for(WebElement w:partLoadings){
+                int loadingTime = Integer.parseInt(w.getAttribute("textContent").replaceAll("\\D+",""));
+                totalLoadingTime+=loadingTime;
+            }
+            System.out.println(totalLoadingTime);
+            double seconds = totalLoadingTime/1000.0;
+            System.out.println(seconds);
+
         }
-
-
-        /*WebDriver driver = new ChromeDriver();
-        driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
-        for(int i = 0; i<sites.size(); i++){
-            driver.get(sites.get(i));
-
-        }*/
 
 
     }

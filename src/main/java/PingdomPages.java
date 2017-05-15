@@ -35,11 +35,19 @@ public class PingdomPages {
 
     private WebElement urlInput;
 
+
+
+    @FindBy(how = How.LINK_TEXT,using = "try again")
+    private WebElement linkTryAgain;
+
     @FindBy(how = How.CSS,using = ".rbc-summary-perfgrade .rbc-summary-info-value")
     private WebElement performanceGrade;
 
     @FindBy(how = How.CSS, using = ".rbc-summary-item.rbc-summary-pagesize .rbc-summary-info-value")
     private WebElement mb;
+
+    @FindBy(how = How.CSS, using = ".button-starttest")
+    private WebElement startTest;
 
     @FindBy(how = How.CSS, using = ".timelineBars")
     private List<WebElement> sec;
@@ -65,6 +73,10 @@ public class PingdomPages {
 
     public WebElement getUrlInput() {return urlInput;}
     public WebElement getPerformanceGrade() {return performanceGrade;}
+    public WebElement getMb() {return mb;}
+    public List<WebElement> getSec() {return sec;}
+
+    public WebElement getLinkTryAgain() {return linkTryAgain;}
 
     public static void selectByText(WebElement element, String text) {
         Select selectElement = new Select(element);
@@ -84,6 +96,10 @@ public class PingdomPages {
         locationUSA.get(0).click();
     }
 
+    public void clickStartTest(){
+        startTest.click();
+    }
+
 
     public String getLetterValue(){
         String letter = performanceGrade.getText().toUpperCase();
@@ -100,10 +116,6 @@ public class PingdomPages {
     public String getSecValue(){
         return "";
     }
-
-
-
-
 
 
 }
