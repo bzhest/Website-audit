@@ -17,7 +17,7 @@ public class CSVwriter {
                 oneLine.append("url - " + p.getUrl());
                 oneLine.append(CSV_SEPARATOR);
                 oneLine.append("Performance grade - " + p.getPerformGradeLetter());
-                oneLine.append(CSV_SEPARATOR);
+                //oneLine.append(CSV_SEPARATOR);
                 oneLine.append(" " + p.getPerformGradeNumber());
                 oneLine.append(CSV_SEPARATOR);
                 oneLine.append("page size - " + p.getMbValue());

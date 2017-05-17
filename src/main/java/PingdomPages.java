@@ -126,7 +126,7 @@ public class PingdomPages {
     }
 
     public void clickOnLocationUSA(){
-        locationUSA.get(1).click();
+        locationUSA.get(0).click();
     }
 
     public void clickStartTest(){
@@ -137,6 +137,14 @@ public class PingdomPages {
     public String getLetterValue(){
         String letter = performanceGrade.getText().toUpperCase();
         return letter;
+    }
+
+    public void clickOnTryAgain(){
+        try{
+            clickStartTest();
+        }catch(Exception e){
+            linkTryAgain.click();
+        }
     }
 
 }

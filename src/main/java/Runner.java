@@ -1,5 +1,4 @@
 import org.openqa.selenium.By;
-import org.openqa.selenium.ElementNotVisibleException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -8,10 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 /**
@@ -32,13 +29,28 @@ public class Runner {
 
         List<PingdomPages> pages = new ArrayList<>();
         WebDriver driver = new ChromeDriver();
+        PingdomPages pp = PageFactory.initElements(driver, PingdomPages.class);
+        VehicleDetailsPages vdp = PageFactory.initElements(driver, VehicleDetailsPages.class);
         WebDriverWait wait = new WebDriverWait(driver, 20);
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+
+        String theeuropeanmastersVDurl = vdp.getVDurl(driver, "http://www.theeuropeanmasters.com/cars-for-sale.html",vdp.getTheeuropeanmasters());
+        String inspectacargezinaVDurl = vdp.getVDurl(driver, "http://www.inspectacargezina.co.za/cars-for-sale.html",vdp.getInspectacargezina());
+        String wallworktrucksVDurl = vdp.getVDurl(driver, "http://www.wallworktrucks.com/trucks-for-sale-inventory.html",vdp.getWallworktrucks());
+
+
         driver.get("https://tools.pingdom.com/#!/");
+
         sites.add("http://www.theeuropeanmasters.com/");
+        sites.add("http://www.theeuropeanmasters.com/cars-for-sale.html");
+        sites.add(theeuropeanmastersVDurl);
         sites.add("http://www.inspectacargezina.co.za/");
+        sites.add("http://www.inspectacargezina.co.za/cars-for-sale.html");
+        sites.add(inspectacargezinaVDurl);
         sites.add("http://www.wallworktrucks.com/");
+        sites.add("http://www.wallworktrucks.com/trucks-for-sale-inventory.html");
+        sites.add(wallworktrucksVDurl);
         sites.add("http://www.eastcountypreowned.com/");
         sites.add("http://www.zidocars.co.za/");
         sites.add("http://www.genuinemotorcars.com/");
@@ -48,7 +60,7 @@ public class Runner {
         sites.add("http://www.globalcarexchange.com/");
         sites.add("http://www.carkingdirect.co.za");
         sites.add("http://www.motortrucks.com");
-        PingdomPages pp = PageFactory.initElements(driver, PingdomPages.class);//new PingdomPages();
+
         for (String s : sites) {
             wait.until(ExpectedConditions.visibilityOf(pp.getLocationDropdownDiv()));
             pp.inputText(pp.getUrlInput(), s);
@@ -61,7 +73,7 @@ public class Runner {
                 pp.clickStartTest();
                 wait.until(ExpectedConditions.visibilityOf(pp.getPerformanceGrade()));
             } catch (Exception e) {
-                pp.getLinkTryAgain().click();
+                pp.clickOnTryAgain();
             }
             Integer performanceGrade = Integer.parseInt(pp.getPerformanceGrade().getAttribute("textContent").replaceAll("\\D+", ""));//("innerHTML");
             System.out.println(performanceGrade);
