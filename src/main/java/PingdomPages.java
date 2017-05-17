@@ -13,17 +13,45 @@ import java.util.List;
  */
 public class PingdomPages {
 
-    private String letterValue;
-    private String numberValue;
-    private String mbValue;
-    private String secValue;
+    private String performGradeLetter;
+    private Integer performGradeNumber;
+    private double mbValue;
+    private double secValue;
     private WebDriver driver;
+    private String url;
 
-    public PingdomPages(String letterValue, String numberValue, String mbValue, String secValue){
-        this.letterValue = getLetterValue();
-        this.numberValue = getNumberValue();
-        this.mbValue = getMbValue();
-        this.secValue = getSecValue();
+    public String getPerformGradeLetter() {
+        return performGradeLetter;
+    }
+
+    public Integer getPerformGradeNumber() {
+        return performGradeNumber;
+    }
+
+    public double getMbValue() {
+        return mbValue;
+    }
+
+    public double getSecValue() {
+        return secValue;
+    }
+
+    @Override
+    public String toString() {
+        return "PingdomPages{" +
+                "performGradeLetter='" + performGradeLetter + '\'' +
+                ", performGradeNumber=" + performGradeNumber +
+                ", mbValue='" + mbValue + '\'' +
+                ", secValue=" + secValue +
+                '}';
+    }
+
+    public PingdomPages(String url, String performGradeLetter, Integer performGradeNumber, double mbValue, double secValue){
+        this.performGradeLetter = performGradeLetter;
+        this.performGradeNumber = performGradeNumber;
+        this.mbValue = mbValue;
+        this.secValue = secValue;
+        this.url = url;
     }
 
     public PingdomPages(){}
@@ -31,11 +59,7 @@ public class PingdomPages {
 
 
     @FindBy(how = How.CSS,using = "#urlinput")
-
-
     private WebElement urlInput;
-
-
 
     @FindBy(how = How.LINK_TEXT,using = "try again")
     private WebElement linkTryAgain;
@@ -88,12 +112,21 @@ public class PingdomPages {
         element.sendKeys(text);
     }
 
+    public String getUrl() {
+        return url;
+    }
+
+    public String getUrlInputValue(){
+        return urlInput.getText();
+
+    }
+
     public void clickOnLocationDropdown(){
         locationDropdownDiv.get(0).click();
     }
 
     public void clickOnLocationUSA(){
-        locationUSA.get(0).click();
+        locationUSA.get(1).click();
     }
 
     public void clickStartTest(){
@@ -105,17 +138,5 @@ public class PingdomPages {
         String letter = performanceGrade.getText().toUpperCase();
         return letter;
     }
-
-    public String getNumberValue(){
-        return "";
-    }
-
-    public String getMbValue(){
-        return "";
-    }
-    public String getSecValue(){
-        return "";
-    }
-
 
 }
