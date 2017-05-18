@@ -139,12 +139,8 @@ public class PingdomPages {
         return letter;
     }
 
-    public void clickOnTryAgain(){
-        try{
-            clickStartTest();
-        }catch(Exception e){
-            linkTryAgain.click();
-        }
-    }
+    //decompositions methods
+
+    public void takeListOfSites
 
 }

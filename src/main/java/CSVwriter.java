@@ -10,7 +10,7 @@ public class CSVwriter {
     public void writeToCSV(List<PingdomPages> pages){
         try
         {
-            BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("new_CSV_file"), "UTF-8"));
+            BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("new_CSV_All"), "UTF-8"));
             for (PingdomPages p : pages)
             {
                 StringBuffer oneLine = new StringBuffer();
