@@ -43,7 +43,7 @@ public class Runner {
         String zidocarsVDurl = vdp.getVDurl(driver, "http://www.zidocars.co.za/cars-for-sale.html", vdp.getZidocars());
         String genuinemotorcarsVDurl = vdp.getVDurl(driver, "http://www.genuinemotorcars.com/cars-for-sale.html", vdp.getGenuinemotorcars());
         String tmxwholesaleVDurl = vdp.getVDurl(driver, "https://www.tmxwholesale.com/cars-for-sale.html", vdp.getTMX());
-        String kenworthnorthwestVDurl = vdp.getVDurl(driver, "https://www.tmxwholesale.com/cars-for-sale.html", vdp.getKenworthnorthwest());
+        String kenworthnorthwestVDurl = vdp.getVDurl(driver, "http://www.kenworthnorthwest.com/trucks-for-sale_condition_2.html", vdp.getKenworthnorthwest());
         String auctiondemoVDurl = vdp.getVDurl(driver, "http://www.auctiondemo.ixloo.com/presaleinventory", vdp.getAuctiondemo());
         String globalcarexchangeVDurl = vdp.getVDurl(driver, "https://www.globalcarexchange.com/cars-for-sale.html", vdp.getGlobalcarexchange());
         String carkingdirectVDurl = vdp.getVDurl(driver, "http://www.carkingdirect.co.za/cars-for-sale.html", vdp.getCarkingdirect());
@@ -132,7 +132,7 @@ public class Runner {
                 totalLoadingTime += loadingTime;
             }
             System.out.println(totalLoadingTime);
-            double seconds = totalLoadingTime / 1000;
+            double seconds = Math.round(totalLoadingTime * 100000) / 1000.0d;
             System.out.println(seconds);
             pages.add(new PingdomPages(url, performanceLetter, performanceGrade, pageSize, seconds));
             System.out.println(pages);

@@ -141,6 +141,8 @@ public class PingdomPages {
 
     //decompositions methods
 
-    public void takeListOfSites
+    public void takeListOfSites(){
+
+    }
 
 }

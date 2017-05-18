@@ -29,7 +29,7 @@ public class VehicleDetailsPages {
     @FindBy(how = How.CSS, using = ".vehicle_title.inline.btn-link.h4")
     private List<WebElement> genuinemotorcars;
 
-    @FindBy(how = How.CSS, using = ".btn-link.h4.no-margin-top.minvR-name.margin-left-lg-none.margin-left-md-none")
+    @FindBy(how = How.CSS, using = ".h4.no-margin-top a")
     private List<WebElement> tmx;
 
     @FindBy(how = How.CSS, using = ".h4.text-primary.vehicle-title")
