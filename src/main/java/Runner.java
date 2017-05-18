@@ -26,7 +26,7 @@ public class Runner {
 
     public static void main(String[] args) {
 
-
+//Инициализирую Вебдрайвер + элементы на страницах PingdomPages и VehicleDetailsPages
         List<PingdomPages> pages = new ArrayList<>();
         WebDriver driver = new ChromeDriver();
         PingdomPages pp = PageFactory.initElements(driver, PingdomPages.class);
@@ -35,11 +35,21 @@ public class Runner {
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
 
+        //Получаю Урл страницы деталей для всех диллер сайтов
         String theeuropeanmastersVDurl = vdp.getVDurl(driver, "http://www.theeuropeanmasters.com/cars-for-sale.html",vdp.getTheeuropeanmasters());
         String inspectacargezinaVDurl = vdp.getVDurl(driver, "http://www.inspectacargezina.co.za/cars-for-sale.html",vdp.getInspectacargezina());
         String wallworktrucksVDurl = vdp.getVDurl(driver, "http://www.wallworktrucks.com/trucks-for-sale-inventory.html",vdp.getWallworktrucks());
+        String eastcountypreownedVDurl = vdp.getVDurl(driver, "http://www.eastcountypreowned.com/cars-for-sale.html",vdp.getEastcountypreowned());
+        String zidocarsVDurl = vdp.getVDurl(driver, "http://www.zidocars.co.za/cars-for-sale.html",vdp.getZidocars());
+        String genuinemotorcarsVDurl = vdp.getVDurl(driver, "http://www.genuinemotorcars.com/cars-for-sale.html",vdp.getGenuinemotorcars());
+        String tmxwholesaleVDurl = vdp.getVDurl(driver, "https://www.tmxwholesale.com/cars-for-sale.html",vdp.getTMX());
+        String kenworthnorthwestVDurl = vdp.getVDurl(driver, "https://www.tmxwholesale.com/cars-for-sale.html",vdp.getKenworthnorthwest());
+        String auctiondemoVDurl = vdp.getVDurl(driver, "http://www.auctiondemo.ixloo.com/presaleinventory",vdp.getAuctiondemo());
+        String globalcarexchangeVDurl = vdp.getVDurl(driver, "https://www.globalcarexchange.com/cars-for-sale.html",vdp.getGlobalcarexchange());
+        String carkingdirectVDurl = vdp.getVDurl(driver, "http://www.carkingdirect.co.za/cars-for-sale.html",vdp.getCarkingdirect());
+        String motortrucksVDurl = vdp.getVDurl(driver, "http://www.motortrucks.com/trucks-for-sale_condition_2.html",vdp.getMotortrucks());
 
-
+// В Пигдоме поочередно запускаю все сайты и получаю для каждого Рейтинг, Вес, Время загрузки и все записываю в CSV файл
         driver.get("https://tools.pingdom.com/#!/");
 
         sites.add("http://www.theeuropeanmasters.com/");
@@ -52,14 +62,32 @@ public class Runner {
         sites.add("http://www.wallworktrucks.com/trucks-for-sale-inventory.html");
         sites.add(wallworktrucksVDurl);
         sites.add("http://www.eastcountypreowned.com/");
+        sites.add("http://www.eastcountypreowned.com/cars-for-sale.html");
+        sites.add(eastcountypreownedVDurl);
         sites.add("http://www.zidocars.co.za/");
+        sites.add("http://www.zidocars.co.za/cars-for-sale.html");
+        sites.add(zidocarsVDurl);
         sites.add("http://www.genuinemotorcars.com/");
+        sites.add("http://www.genuinemotorcars.com/cars-for-sale.html");
+        sites.add(genuinemotorcarsVDurl);
         sites.add("https://www.tmxwholesale.com/");
+        sites.add("https://www.tmxwholesale.com/cars-for-sale.html");
+        sites.add(tmxwholesaleVDurl);
         sites.add("http://www.kenworthnorthwest.com/");
+        sites.add("http://www.kenworthnorthwest.com/trucks-for-sale_condition_2.html");
+        sites.add(kenworthnorthwestVDurl);
         sites.add("http://www.auctiondemo.ixloo.com/");
+        sites.add("http://www.auctiondemo.ixloo.com/presaleinventory");
+        sites.add(auctiondemoVDurl);
         sites.add("http://www.globalcarexchange.com/");
+        sites.add("https://www.globalcarexchange.com/cars-for-sale.html");
+        sites.add(globalcarexchangeVDurl);
         sites.add("http://www.carkingdirect.co.za");
+        sites.add("http://www.carkingdirect.co.za/cars-for-sale.html");
+        sites.add(carkingdirectVDurl);
         sites.add("http://www.motortrucks.com");
+        sites.add("http://www.motortrucks.com/trucks-for-sale_condition_2.html");
+        sites.add(motortrucksVDurl);
 
         for (String s : sites) {
             wait.until(ExpectedConditions.visibilityOf(pp.getLocationDropdownDiv()));
