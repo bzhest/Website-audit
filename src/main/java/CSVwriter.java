@@ -6,23 +6,26 @@ import java.util.List;
  */
 public class CSVwriter {
     private final static String CSV_SEPARATOR = ";";
+    private int counter = 1;
 
-    public void writeToCSV(List<PingdomPages> pages){
+    //Add if p.getUrl contains "vid_" - write siteName + "/datails"
+
+    public void writeToCSV(List<PingdomPages> pages, String fileName){
         try
         {
-            BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("new_CSV_All"), "UTF-8"));
+            BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(fileName), "UTF-8"));
             for (PingdomPages p : pages)
             {
                 StringBuffer oneLine = new StringBuffer();
-                oneLine.append("url - " + p.getUrl());
+                oneLine.append(counter++ +") " + p.getUrl());
                 oneLine.append(CSV_SEPARATOR);
-                oneLine.append("Performance grade - " + p.getPerformGradeLetter());
+                oneLine.append("  " + p.getPerformGradeLetter());
                 //oneLine.append(CSV_SEPARATOR);
-                oneLine.append(" " + p.getPerformGradeNumber());
+                oneLine.append(p.getPerformGradeNumber());
                 oneLine.append(CSV_SEPARATOR);
-                oneLine.append("page size - " + p.getMbValue());
+                oneLine.append(p.getMbValue() + " MB");
                 oneLine.append(CSV_SEPARATOR);
-                oneLine.append("page loading time - " + p.getSecValue());
+                oneLine.append(p.getSecValue() + " Sec");
                 bw.write(oneLine.toString());
                 bw.newLine();
             }

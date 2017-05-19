@@ -87,20 +87,16 @@ public class PingdomPages {
 
     //Methods------------------------------------------------------------------------------------
 
+    //
     public WebElement getLocationDropdownDiv() {
         return locationDropdownDiv.get(0);
     }
-
-    public WebElement getLocationDropdownSelect() {
-        return locationDropDownSelect;
-    }
-
+    public WebElement getLinkTryAgain() {return linkTryAgain;}
     public WebElement getUrlInput() {return urlInput;}
     public WebElement getPerformanceGrade() {return performanceGrade;}
     public WebElement getMb() {return mb;}
-    public List<WebElement> getSec() {return sec;}
 
-    public WebElement getLinkTryAgain() {return linkTryAgain;}
+    public List<WebElement> getSec() {return sec;}
 
     public static void selectByText(WebElement element, String text) {
         Select selectElement = new Select(element);
@@ -120,6 +116,8 @@ public class PingdomPages {
         return urlInput.getText();
 
     }
+
+    public WebElement getButtonClickStartTest(){return startTest;}
 
     public void clickOnLocationDropdown(){
         locationDropdownDiv.get(0).click();
