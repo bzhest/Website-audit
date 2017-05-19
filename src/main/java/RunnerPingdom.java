@@ -28,9 +28,9 @@ public class RunnerPingdom {
         PingdomPages pp = PageFactory.initElements(driver, PingdomPages.class);
         VehicleDetailsPages vdp = PageFactory.initElements(driver, VehicleDetailsPages.class);
         PingdomPagesMethods ppm = new PingdomPagesMethods();
-        WebDriverWait wait = new WebDriverWait(driver, 20);
+        WebDriverWait wait = new WebDriverWait(driver, 30);
         driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 
         //Получаю Урл страницы деталей для всех диллер сайтов
         String theeuropeanmastersVDurl = vdp.getVDurl(driver, "http://www.theeuropeanmasters.com/cars-for-sale.html", vdp.getTheeuropeanmasters());
@@ -160,12 +160,12 @@ public class RunnerPingdom {
     /*method will input site, select USA server, click "Start test", since Pingdom is often work wrong (don't show
      PingdomGrade selector, show 'Try Again' link, or will show nothing - in such cases methor repeat again))*/
     private static void tryToSelectAllPingdomPagesFields(WebDriver driver, PingdomPages pages, String currentUrl) {
-        WebDriverWait wait = new WebDriverWait(driver, 20);
+        WebDriverWait wait = new WebDriverWait(driver, 30);
         try {
             pages.clickStartTest();
             wait.until(ExpectedConditions.visibilityOf(pages.getPerformanceGrade()));
         } catch (Exception ex) {
-            if (!(pages.getLinkTryAgain().isDisplayed()) || !(pages.getButtonClickStartTest().isDisplayed())) {
+            if (!pages.getLinkTryAgain().isDisplayed() && !pages.getButtonClickStartTest().isDisplayed()) {
                 try{
                     driver.get(driver.getCurrentUrl());
                     wait.until(ExpectedConditions.visibilityOf(pages.getLocationDropdownDiv()));
@@ -176,6 +176,8 @@ public class RunnerPingdom {
             } else if (pages.getLinkTryAgain().isDisplayed()) {
                 try {
                     pages.getLinkTryAgain().click();
+                    wait.until(ExpectedConditions.visibilityOf(pages.getLocationDropdownDiv()));
+                    inputSiteSelectCountryClickStart(pages, currentUrl);
                 } catch (Exception ex1) {
                     tryToSelectAllPingdomPagesFields(driver, pages, currentUrl);
                 }

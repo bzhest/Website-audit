@@ -1,3 +1,5 @@
+import org.apache.commons.lang3.StringUtils;
+
 import java.io.*;
 import java.util.List;
 
@@ -8,7 +10,7 @@ public class CSVwriter {
     private final static String CSV_SEPARATOR = ";";
     private int counter = 1;
 
-    //Add if p.getUrl contains "vid_" - write siteName + "/datails"
+    //Add if p.getUrl contains "vid_" - write siteName + "Vehicle Details"
 
     public void writeToCSV(List<PingdomPages> pages, String fileName){
         try
@@ -17,7 +19,13 @@ public class CSVwriter {
             for (PingdomPages p : pages)
             {
                 StringBuffer oneLine = new StringBuffer();
-                oneLine.append(counter++ +") " + p.getUrl());
+                if(p.getUrl().contains("vid_")){//String with "vid_" is Vehicle Details Page
+                    int indexOfThirdSlash = StringUtils.ordinalIndexOf(p.getUrl(), "/",3);
+                    String cuttedUrl = p.getUrl().substring(0,indexOfThirdSlash);
+                    oneLine.append(counter++ +") " + cuttedUrl + "/Vehicle_Details");
+                }else{
+                    oneLine.append(counter++ +") " + p.getUrl());
+                }
                 oneLine.append(CSV_SEPARATOR);
                 oneLine.append("  " + p.getPerformGradeLetter());
                 //oneLine.append(CSV_SEPARATOR);
