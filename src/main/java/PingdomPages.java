@@ -20,32 +20,6 @@ public class PingdomPages {
     private WebDriver driver;
     private String url;
 
-    public String getPerformGradeLetter() {
-        return performGradeLetter;
-    }
-
-    public Integer getPerformGradeNumber() {
-        return performGradeNumber;
-    }
-
-    public double getMbValue() {
-        return mbValue;
-    }
-
-    public double getSecValue() {
-        return secValue;
-    }
-
-    @Override
-    public String toString() {
-        return "PingdomPages{" +
-                "performGradeLetter='" + performGradeLetter + '\'' +
-                ", performGradeNumber=" + performGradeNumber +
-                ", mbValue='" + mbValue + '\'' +
-                ", secValue=" + secValue +
-                '}';
-    }
-
     public PingdomPages(String url, String performGradeLetter, Integer performGradeNumber, double mbValue, double secValue){
         this.performGradeLetter = performGradeLetter;
         this.performGradeNumber = performGradeNumber;
@@ -95,8 +69,28 @@ public class PingdomPages {
     public WebElement getUrlInput() {return urlInput;}
     public WebElement getPerformanceGrade() {return performanceGrade;}
     public WebElement getMb() {return mb;}
-
+    public String getPerformGradeLetter() {
+        return performGradeLetter;
+    }
+    public Integer getPerformGradeNumber() {
+        return performGradeNumber;
+    }
+    public double getMbValue() {
+        return mbValue;
+    }
+    public double getSecValue() {
+        return secValue;
+    }
     public List<WebElement> getSec() {return sec;}
+    public String getUrl() {
+        return url;
+    }
+    public WebElement getButtonClickStartTest(){return startTest;}
+    public void clickOnLocationDropdown(){
+        locationDropdownDiv.get(0).click();
+    }
+    public void clickOnLocationUSA(){locationUSA.get(0).click();}
+    public void clickStartTest(){startTest.click();}
 
     public static void selectByText(WebElement element, String text) {
         Select selectElement = new Select(element);
@@ -108,39 +102,19 @@ public class PingdomPages {
         element.sendKeys(text);
     }
 
-    public String getUrl() {
-        return url;
-    }
-
-    public String getUrlInputValue(){
-        return urlInput.getText();
-
-    }
-
-    public WebElement getButtonClickStartTest(){return startTest;}
-
-    public void clickOnLocationDropdown(){
-        locationDropdownDiv.get(0).click();
-    }
-
-    public void clickOnLocationUSA(){
-        locationUSA.get(0).click();
-    }
-
-    public void clickStartTest(){
-        startTest.click();
-    }
-
-
     public String getLetterValue(){
         String letter = performanceGrade.getText().toUpperCase();
         return letter;
     }
 
-    //decompositions methods
-
-    public void takeListOfSites(){
-
+    @Override
+    public String toString() {
+        return "PingdomPages{" +
+                "performGradeLetter='" + performGradeLetter + '\'' +
+                ", performGradeNumber=" + performGradeNumber +
+                ", mbValue='" + mbValue + '\'' +
+                ", secValue=" + secValue +
+                '}';
     }
 
 }

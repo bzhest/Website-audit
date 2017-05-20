@@ -96,23 +96,8 @@ public class RunnerPingdom {
             pp.clickOnLocationUSA();
 
             tryToSelectAllPingdomPagesFields(driver, pp, s);// description in method
-            /*try {
-                pp.clickStartTest();
-                wait.until(ExpectedConditions.visibilityOf(pp.getPerformanceGrade()));
-            } catch (Exception e) {
-                if (!(pp.getLinkTryAgain().isDisplayed()) || !(pp.getButtonClickStartTest().isDisplayed())) {
-                    driver.get(driver.getCurrentUrl());
-                    wait.until(ExpectedConditions.visibilityOf(pp.getLocationDropdownDiv()));
-                    inputSiteSelectCountryClickStart(pp, s);
-                }
-                if (pp.getLinkTryAgain().isDisplayed()) {
-                    pp.getLinkTryAgain().click();
-                } else {
-                    pp.clickStartTest();
-                }
-            }*/
 
-            Integer performanceGrade = Integer.parseInt(pp.getPerformanceGrade().getAttribute("textContent").replaceAll("\\D+", ""));//("innerHTML");
+            Integer performanceGrade = Integer.parseInt(pp.getPerformanceGrade().getAttribute("textContent").replaceAll("\\D+", ""));//also can be used "innerHTML"
             System.out.println(performanceGrade);
             String performanceLetter = "";
             if (performanceGrade >= 90) {
@@ -126,20 +111,19 @@ public class RunnerPingdom {
             }
             System.out.println(performanceLetter);
 
-            //ppm.calculatePerformanceGradeAndLetter();
             double pageSize = Double.parseDouble(pp.getMb().getAttribute("textContent").replaceAll("[^0-9.]", ""));
             System.out.println(pageSize);
             List<WebElement> partLoadings = pp.getSec().get(0).findElements(By.xpath(".//*"));
-            System.out.println(partLoadings.size());
+            //System.out.println(partLoadings.size());
             int totalLoadingTime = 0;
             for (WebElement w : partLoadings) {
                 int loadingTime = Integer.parseInt(w.getAttribute("textContent").replaceAll("\\D+", ""));
                 totalLoadingTime += loadingTime;
             }
-            System.out.println(totalLoadingTime);
+            System.out.println(totalLoadingTime + "ms");
             double seconds = Math.round(totalLoadingTime) / 1000.0d;
             seconds = PingdomPagesMethods.round(seconds, 1);
-            System.out.println(seconds);
+            System.out.println(seconds + "sec");
             pages.add(new PingdomPages(url, performanceLetter, performanceGrade, pageSize, seconds));
             System.out.println(pages);
             CSVwriter writer = new CSVwriter();

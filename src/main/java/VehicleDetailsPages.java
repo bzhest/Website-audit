@@ -11,6 +11,7 @@ import java.util.List;
 public class VehicleDetailsPages {
 
 
+    // David's sites
     @FindBy(how = How.CSS, using = "a.h4.text-primary.vehicle-title")
     private List<WebElement> theeuropeanmasters;
 
@@ -47,6 +48,17 @@ public class VehicleDetailsPages {
     @FindBy(how = How.CSS, using = ".h4.text-primary.vehicle-title")
     private List<WebElement> motortrucks;
 
+    //Adtem's sites
+
+    @FindBy(how = How.CSS, using = ".h4.text-primary.vehicle-title")
+    private List<WebElement> motortrader;
+
+    @FindBy(how = How.CSS, using = ".product-title-link.product_s_desc>a")
+    private List<WebElement> supertiresonline;
+
+
+    // David's sites methods
+
     public List<WebElement> getTheeuropeanmasters() {
         return theeuropeanmasters;
     }
@@ -76,6 +88,13 @@ public class VehicleDetailsPages {
     public List<WebElement> getCarkingdirect() {return carkingdirect;}
 
     public List<WebElement> getMotortrucks() {return motortrucks;}
+
+    // Artems's sites methods
+
+    public List<WebElement> getMotortrader() {return motortrader;}
+
+    public List<WebElement> getSupertiresonline() {return supertiresonline;}
+
 
 
     public String getVDurl(WebDriver driver, String inventoryURL, List <WebElement> carLink){
