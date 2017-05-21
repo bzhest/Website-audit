@@ -16,6 +16,8 @@ public class DavidSites {
 
     public  static ArrayList<String> sitsToDavid = new ArrayList<>();
     public static ArrayList<PingdomPages> davidPages = new ArrayList<>();
+    public static ArrayList<Google> davidPagesGoogle = new ArrayList<>();
+
 
 
     public static void main(String[] args) {
@@ -25,7 +27,9 @@ public class DavidSites {
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
         WebDriverWait wait = new WebDriverWait(driver, 30);
         PingdomPagesMethods ppm = new PingdomPagesMethods();
+        GoogleMethods gm = new GoogleMethods();
         PingdomPages pp = PageFactory.initElements(driver, PingdomPages.class);
+        Google g = PageFactory.initElements(driver, Google.class);
         VehicleDetailsPages vdp = PageFactory.initElements(driver, VehicleDetailsPages.class);
 
         String theeuropeanmastersVDurl = vdp.getVDurl(driver, "http://www.theeuropeanmasters.com/cars-for-sale.html", vdp.getTheeuropeanmasters());
@@ -81,6 +85,10 @@ public class DavidSites {
         sitsToDavid.add(motortrucksVDurl);
 
         ppm.getPingdomSitesParameters(sitsToDavid, davidPages,pp,  driver, "csvDavid", wait);
+
+        driver.get("https://developers.google.com/speed/pagespeed/insights/");
+
+        gm.getGoogleSitesParameters(sitsToDavid,davidPagesGoogle, g, "csvDavid1");
 
     }
 

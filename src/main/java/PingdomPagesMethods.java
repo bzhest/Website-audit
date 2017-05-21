@@ -73,7 +73,7 @@ public class PingdomPagesMethods {
 
     public void writeToCSV(ArrayList<PingdomPages> pingdomPage, String fileName){
         CSVwriter writer = new CSVwriter();
-        writer.writeToCSV(pingdomPage, fileName);
+        writer.writePingdomToCSV(pingdomPage, fileName);
     }
 
     public void createPingdomPageObject(ArrayList<PingdomPages> pingdomPage, String site, PingdomPages pp){

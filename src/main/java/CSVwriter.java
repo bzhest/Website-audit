@@ -12,7 +12,7 @@ public class CSVwriter {
 
     //Add if p.getUrl contains "vid_" - write siteName + "Vehicle Details"
 
-    public void writeToCSV(List<PingdomPages> pages, String fileName){
+    public void writePingdomToCSV(List<PingdomPages> pages, String fileName){
         try
         {
             BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(fileName), "UTF-8"));
@@ -35,6 +35,27 @@ public class CSVwriter {
                 oneLine.append(CSV_SEPARATOR);
                 oneLine.append(p.getSecValue() + " Sec");
                 bw.write(oneLine.toString());
+                bw.newLine();
+            }
+            bw.flush();
+            bw.close();
+        }
+        catch (UnsupportedEncodingException e) {}
+        catch (FileNotFoundException e){}
+        catch (IOException e){}
+    }
+
+    public void writeGoogleToCSV(List<Google> googlePages, String fileName){
+        try
+        {
+            BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(fileName), "UTF-8"));
+            for (Google g : googlePages)
+            {
+                StringBuffer oneLine = new StringBuffer();
+
+                oneLine.append("  " + g.getNumberMobile());
+                oneLine.append(CSV_SEPARATOR);
+                oneLine.append(" " + g.getNumberDesktop());
                 bw.newLine();
             }
             bw.flush();

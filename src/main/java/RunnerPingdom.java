@@ -127,7 +127,7 @@ public class RunnerPingdom {
             pages.add(new PingdomPages(url, performanceLetter, performanceGrade, pageSize, seconds));
             System.out.println(pages);
             CSVwriter writer = new CSVwriter();
-            writer.writeToCSV(pages, "new_CSV_All");
+            writer.writePingdomToCSV(pages, "new_CSV_All");
 
 
         }

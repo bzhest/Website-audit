@@ -9,8 +9,14 @@ import java.util.List;
  */
 public class Google {
 
-    private String mobileValue = getNumberMobile().getAttribute("textContent").replace(" / 100","");
-    private String DesktopValue = getNumberDesktop().getAttribute("textContent").replace(" / 100","");
+
+    public Google(String mobileValue, String desktopValue) {
+        this.mobileValue = mobileValue;
+        this.desktopValue = desktopValue;
+    }
+
+    private String mobileValue;//
+    private String desktopValue;// = getNumberDesktop().getAttribute("textContent").replace(" / 100","");
 
     @FindBy(how = How.CSS,using = ".url.label-input-label")
     private WebElement urlInput;
@@ -29,6 +35,8 @@ public class Google {
 
     public WebElement getNumberMobile(){return numberMobile;}
     public WebElement getNumberDesktop(){return numberDesktop;}
+    public WebElement getUrlInput(){return urlInput;}
+    public WebElement getButtonAnalize(){return buttonAnalize;}
 
 
     public WebElement getMobileTab(){return tabMobile_Desktop.get(0);}
