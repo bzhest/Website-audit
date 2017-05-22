@@ -12,25 +12,27 @@ public class GoogleMethods {
     WebDriver driver;
 
 
-    public void getGoogleSitesParameters(ArrayList<String> sites, ArrayList<Google> googlePages, Google g, String csvFileName, PingdomPages pp, WebDriverWait wait) {
+    public void getGoogleSitesParameters(ArrayList<String> sites, ArrayList<GooglePages> googlePages, GooglePages g, String csvFileName, PingdomPages pp, WebDriverWait wait) {
 
         for (String site : sites) {
-            wait.until(ExpectedConditions.visibilityOf(g.getMobileTab()));
-            g.getMobileTab().click();
+
             pp.inputText(g.getUrlInput(), site);
             g.getButtonAnalize().click();
+            wait.until(ExpectedConditions.visibilityOf(g.getMobileTab()));
+            g.getMobileTab().click();
             String mobileValue = g.getNumberMobile().getAttribute("textContent").replace(" / 100","");
             g.getDesktopTab().click();
             String desktopValue = g.getNumberDesktop().getAttribute("textContent").replace(" / 100","");
-            googlePages.add(new Google(mobileValue,desktopValue));
+            googlePages.add(new GooglePages(site, mobileValue,desktopValue));
             writeToCSV(googlePages,csvFileName);
         }
     }
 
-    public void writeToCSV(ArrayList<Google> googlePages, String fileName){
+    public void writeToCSV(ArrayList<GooglePages> googlePages, String fileName){
         CSVwriter writer = new CSVwriter();
         writer.writeGoogleToCSV(googlePages, fileName);
     }
+
 
 
 

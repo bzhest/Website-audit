@@ -7,36 +7,51 @@ import java.util.List;
 /**
  * Created by DWork on 19.05.2017.
  */
-public class Google {
+public class GooglePages {
+
+    private String mobileValue;
+    private String desktopValue;
+    private String url;
 
 
-    public Google(String mobileValue, String desktopValue) {
+    public GooglePages(String url, String mobileValue, String desktopValue) {
+        this.url = url;
         this.mobileValue = mobileValue;
         this.desktopValue = desktopValue;
     }
 
-    private String mobileValue;//
-    private String desktopValue;// = getNumberDesktop().getAttribute("textContent").replace(" / 100","");
+    public String getMobileValue() {
+        return mobileValue;
+    }
 
-    @FindBy(how = How.CSS,using = ".url.label-input-label")
+    public String getDesktopValue() {
+        return desktopValue;
+    }
+
+    public GooglePages(){}
+
+
+
+    @FindBy(how = How.CSS,using = ".url")
     private WebElement urlInput;
 
     @FindBy(how = How.CSS,using = ".button.button-red.analyze")
     private WebElement buttonAnalize;
 
-    @FindBy(how = How.CSS,using = ".ranking .score.error")
-    private WebElement numberMobile;
+    @FindBy(how = How.CSS,using = ".ranking span:nth-child(2)")
+    private List<WebElement> numberMobile;
 
-    @FindBy(how = How.CSS,using = ".ranking .score.warning")
-    private WebElement numberDesktop;
+    @FindBy(how = How.CSS,using = ".ranking span:nth-child(2)")
+    private List<WebElement> numberDesktop;
 
     @FindBy(how = How.CSS,using = ".ranking")
     private List<WebElement> tabMobile_Desktop;
 
-    public WebElement getNumberMobile(){return numberMobile;}
-    public WebElement getNumberDesktop(){return numberDesktop;}
+    public WebElement getNumberMobile(){return numberMobile.get(0);}
+    public WebElement getNumberDesktop(){return numberDesktop.get(1);}
     public WebElement getUrlInput(){return urlInput;}
     public WebElement getButtonAnalize(){return buttonAnalize;}
+    public String getUrl(){return url;}
 
 
     public WebElement getMobileTab(){return tabMobile_Desktop.get(0);}

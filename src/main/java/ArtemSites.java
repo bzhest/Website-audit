@@ -4,7 +4,6 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -12,16 +11,19 @@ import java.util.concurrent.TimeUnit;
  */
 public class ArtemSites {
     public  static ArrayList<String> sitsToArtem = new ArrayList<>();
-    public static ArrayList<PingdomPages> ArtemPages = new ArrayList<>();
+    public static ArrayList<PingdomPages> artemPagesPingdom = new ArrayList<>();
+    public static ArrayList<GooglePages> artemPagesGooglePages = new ArrayList<>();
 
 
     public static void main(String[] args) {
         WebDriver driver = new ChromeDriver();
         driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-        WebDriverWait wait = new WebDriverWait(driver, 30);
+        driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+        WebDriverWait wait = new WebDriverWait(driver, 20);
+        GoogleMethods gm = new GoogleMethods();
         PingdomPages pp = PageFactory.initElements(driver, PingdomPages.class);
         VehicleDetailsPages vdp = PageFactory.initElements(driver, VehicleDetailsPages.class);
+        GooglePages g = PageFactory.initElements(driver, GooglePages.class);
         PingdomPagesMethods ppm = new PingdomPagesMethods();
 
         String motortraderVDurl = vdp.getVDurl(driver,"http://www.motortrader.co.za/new-and-used-cars-for-sale-in-south-africa.html", vdp.getMotortrader());
@@ -50,7 +52,11 @@ public class ArtemSites {
         sitsToArtem.add("https://www.tmxwholesale.com/cars-for-sale.html");
         sitsToArtem.add(tmxwholesaleVDurl);
 
-        ppm.getPingdomSitesParameters(sitsToArtem, ArtemPages,pp, driver, "csvArtem",wait);
+        ppm.getPingdomSitesParameters(sitsToArtem, artemPagesPingdom,pp, driver, "csvArtem",wait);
+
+        driver.get("https://developers.google.com/speed/pagespeed/insights/");
+
+        gm.getGoogleSitesParameters(sitsToArtem, artemPagesGooglePages, g, "csvArtemGoogle", pp, wait);
 
 
     }

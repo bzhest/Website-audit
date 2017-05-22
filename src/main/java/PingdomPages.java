@@ -36,8 +36,6 @@ public class PingdomPages {
     @FindBy(how = How.CSS,using = "#urlinput")
     private WebElement urlInput;
 
-    WebElement tryAgain = driver.findElement(By.partialLinkText("dd"));
-
     @FindBy(how = How.LINK_TEXT,using = "try again")
     private WebElement linkTryAgain;
 

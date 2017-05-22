@@ -4,9 +4,6 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -15,8 +12,8 @@ import java.util.concurrent.TimeUnit;
 public class DavidSites {
 
     public  static ArrayList<String> sitsToDavid = new ArrayList<>();
-    public static ArrayList<PingdomPages> davidPages = new ArrayList<>();
-    public static ArrayList<Google> davidPagesGoogle = new ArrayList<>();
+    public static ArrayList<PingdomPages> davidPagesPingdom = new ArrayList<>();
+    public static ArrayList<GooglePages> davidPagesGooglePages = new ArrayList<>();
 
 
 
@@ -24,13 +21,13 @@ public class DavidSites {
 
         WebDriver driver = new ChromeDriver();
         driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-        WebDriverWait wait = new WebDriverWait(driver, 30);
-        PingdomPagesMethods ppm = new PingdomPagesMethods();
+        driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+        WebDriverWait wait = new WebDriverWait(driver, 20);
         GoogleMethods gm = new GoogleMethods();
         PingdomPages pp = PageFactory.initElements(driver, PingdomPages.class);
-        Google g = PageFactory.initElements(driver, Google.class);
+        GooglePages g = PageFactory.initElements(driver, GooglePages.class);
         VehicleDetailsPages vdp = PageFactory.initElements(driver, VehicleDetailsPages.class);
+        PingdomPagesMethods ppm = new PingdomPagesMethods();
 
         String theeuropeanmastersVDurl = vdp.getVDurl(driver, "http://www.theeuropeanmasters.com/cars-for-sale.html", vdp.getTheeuropeanmasters());
         String inspectacargezinaVDurl = vdp.getVDurl(driver, "http://www.inspectacargezina.co.za/cars-for-sale.html", vdp.getInspectacargezina());
@@ -84,11 +81,12 @@ public class DavidSites {
         sitsToDavid.add("http://www.motortrucks.com/trucks-for-sale_condition_2.html");
         sitsToDavid.add(motortrucksVDurl);
 
-        ppm.getPingdomSitesParameters(sitsToDavid, davidPages,pp,  driver, "csvDavid", wait);
+        ppm.getPingdomSitesParameters(sitsToDavid, davidPagesPingdom,pp,  driver, "csvDavidPingdom", wait);
 
         driver.get("https://developers.google.com/speed/pagespeed/insights/");
 
-        gm.getGoogleSitesParameters(sitsToDavid,davidPagesGoogle, g, "csvDavid1");
+        gm.getGoogleSitesParameters(sitsToDavid, davidPagesGooglePages, g, "csvDavidGoogle", pp, wait);
+
 
     }
 

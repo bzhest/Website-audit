@@ -105,7 +105,7 @@ public class PingdomPagesMethods {
             performanceLetter += "A";
         } else if (performanceGrade >= 80 && performanceGrade < 90) {
             performanceLetter += "B";
-        } else if (performanceGrade >= 65 && performanceGrade < 80) {
+        } else if (performanceGrade >= 70 && performanceGrade < 80) {
             performanceLetter += "C";
         } else {
             performanceLetter += "D";
@@ -150,17 +150,17 @@ public class PingdomPagesMethods {
             pp.clickStartTest();
             wait.until(ExpectedConditions.visibilityOf(pp.getPerformanceGrade()));
         } catch (Exception ex) {
-            if (!pp.getLinkTryAgain().isDisplayed() && !pp.getButtonClickStartTest().isDisplayed()) {
+            if(pp.getLinkTryAgain() != null/*pp.getLinkTryAgain().isDisplayed()*/) {
                 try {
-                    driver.get(driver.getCurrentUrl());
+                    pp.getLinkTryAgain().click();
                     wait.until(ExpectedConditions.visibilityOf(pp.getLocationDropdownDiv()));
                     inputSiteSelectCountryClickStart(pp, site);
                 } catch (Exception ex1) {
                     tryToSelectAllPingdomPagesFields(driver, pp, site, wait);
                 }
-            } else if (pp.getLinkTryAgain().isDisplayed()) {
+            }else if (!pp.getButtonClickStartTest().isDisplayed()){
                 try {
-                    pp.getLinkTryAgain().click();
+                    driver.get(driver.getCurrentUrl());
                     wait.until(ExpectedConditions.visibilityOf(pp.getLocationDropdownDiv()));
                     inputSiteSelectCountryClickStart(pp, site);
                 } catch (Exception ex1) {

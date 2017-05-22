@@ -45,17 +45,27 @@ public class CSVwriter {
         catch (IOException e){}
     }
 
-    public void writeGoogleToCSV(List<Google> googlePages, String fileName){
+    public void writeGoogleToCSV(List<GooglePages> googlePages, String fileName){
         try
         {
             BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(fileName), "UTF-8"));
-            for (Google g : googlePages)
+            for (GooglePages g : googlePages)
             {
                 StringBuffer oneLine = new StringBuffer();
 
-                oneLine.append("  " + g.getNumberMobile());
+                if(g.getUrl().contains("vid_")){//String with "vid_" is Vehicle Details Page
+                    int indexOfThirdSlash = StringUtils.ordinalIndexOf(g.getUrl(), "/",3);
+                    String cuttedUrl = g.getUrl().substring(0,indexOfThirdSlash);
+                    oneLine.append(counter++ +") " + cuttedUrl + "/Vehicle_Details");
+                }else {
+
+                    oneLine.append(counter++ +") " + g.getUrl());
+                }
                 oneLine.append(CSV_SEPARATOR);
-                oneLine.append(" " + g.getNumberDesktop());
+                oneLine.append("  Mobile: " + g.getMobileValue());
+                oneLine.append(CSV_SEPARATOR);
+                oneLine.append(" Desktop: " + g.getDesktopValue());
+                bw.write(oneLine.toString());
                 bw.newLine();
             }
             bw.flush();
