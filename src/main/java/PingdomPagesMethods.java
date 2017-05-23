@@ -148,7 +148,7 @@ public class PingdomPagesMethods {
             pp.clickStartTest();
             wait.until(ExpectedConditions.visibilityOf(pp.getPerformanceGrade()));
         } catch (Exception ex) {
-            if (pp.getLinkTryAgain() != null/*pp.getLinkTryAgain().isDisplayed()*/) {
+            if (pp.getLinkTryAgain() != null) {
                 try {
                     pp.getLinkTryAgain().click();
                     wait.until(ExpectedConditions.visibilityOf(pp.getLocationDropdownDiv()));
