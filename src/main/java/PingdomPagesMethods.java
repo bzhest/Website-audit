@@ -22,30 +22,29 @@ public class PingdomPagesMethods {
     Double seconds;
 
 
-
     public void getPingdomSitesParameters(ArrayList<String> sites, ArrayList<PingdomPages> pingdomPage, PingdomPages pp, WebDriver driver, String csvFileName, WebDriverWait wait) {
         for (String site : sites) {
             wait.until(ExpectedConditions.visibilityOf(pp.getLocationDropdownDiv()));
             inputSiteSelectCountry(pp, site);
-            tryToSelectAllPingdomPagesFields(driver, pp, site,wait);
+            tryToSelectAllPingdomPagesFields(driver, pp, site, wait);
             calculatePerformanceGrade(pp);
             calculatePerformanceLetter(getPerformanceGrade(pp));
             calculatePageSize(pp);
             calculateLoadTime(pp);
             createPingdomPageObject(pingdomPage, site, pp);
-            writeToCSV(pingdomPage,csvFileName);
+            writeToCSV(pingdomPage, csvFileName);
         }
     }
 
-    public Double getPageSize(PingdomPages pp){
+    public Double getPageSize(PingdomPages pp) {
         return Double.parseDouble(pp.getMb().getAttribute("textContent").replaceAll("[^0-9.]", ""));
     }
 
-    public Integer getPerformanceGrade(PingdomPages pp){
+    public Integer getPerformanceGrade(PingdomPages pp) {
         return Integer.parseInt(pp.getPerformanceGrade().getAttribute("textContent").replaceAll("\\D+", ""));
     }
 
-    public String getPerformanceLetter(Integer performanceGrade){
+    public String getPerformanceLetter(Integer performanceGrade) {
         performanceLetter = "";
         if (performanceGrade >= 90) {
             performanceLetter += "A";
@@ -59,7 +58,7 @@ public class PingdomPagesMethods {
         return performanceLetter;
     }
 
-    public Double getSeconds(PingdomPages pp){
+    public Double getSeconds(PingdomPages pp) {
         List<WebElement> partLoadings = pp.getSec().get(0).findElements(By.xpath(".//*"));
         int totalLoadingTime = 0;
         for (WebElement w : partLoadings) {
@@ -71,12 +70,12 @@ public class PingdomPagesMethods {
         return seconds;
     }
 
-    public void writeToCSV(ArrayList<PingdomPages> pingdomPage, String fileName){
+    public void writeToCSV(ArrayList<PingdomPages> pingdomPage, String fileName) {
         CSVwriter writer = new CSVwriter();
         writer.writePingdomToCSV(pingdomPage, fileName);
     }
 
-    public void createPingdomPageObject(ArrayList<PingdomPages> pingdomPage, String site, PingdomPages pp){
+    public void createPingdomPageObject(ArrayList<PingdomPages> pingdomPage, String site, PingdomPages pp) {
         pingdomPage.add(new PingdomPages(site, getPerformanceLetter(getPerformanceGrade(pp)), getPerformanceGrade(pp), getPageSize(pp), getSeconds(pp)));
         System.out.println(pingdomPage);
     }
@@ -99,7 +98,7 @@ public class PingdomPagesMethods {
         System.out.println(pageSize);
     }
 
-    public void calculatePerformanceLetter(Integer performanceGrade){
+    public void calculatePerformanceLetter(Integer performanceGrade) {
         performanceLetter = "";
         if (performanceGrade >= 90) {
             performanceLetter += "A";
@@ -112,7 +111,6 @@ public class PingdomPagesMethods {
         }
         System.out.println(performanceLetter);
     }
-
 
 
     public void calculatePerformanceGrade(PingdomPages pp) {
@@ -150,7 +148,7 @@ public class PingdomPagesMethods {
             pp.clickStartTest();
             wait.until(ExpectedConditions.visibilityOf(pp.getPerformanceGrade()));
         } catch (Exception ex) {
-            if(pp.getLinkTryAgain() != null/*pp.getLinkTryAgain().isDisplayed()*/) {
+            if (pp.getLinkTryAgain() != null/*pp.getLinkTryAgain().isDisplayed()*/) {
                 try {
                     pp.getLinkTryAgain().click();
                     wait.until(ExpectedConditions.visibilityOf(pp.getLocationDropdownDiv()));
@@ -158,7 +156,7 @@ public class PingdomPagesMethods {
                 } catch (Exception ex1) {
                     tryToSelectAllPingdomPagesFields(driver, pp, site, wait);
                 }
-            }else if (!pp.getButtonClickStartTest().isDisplayed()){
+            } else if (!pp.getButtonClickStartTest().isDisplayed()) {
                 try {
                     driver.get(driver.getCurrentUrl());
                     wait.until(ExpectedConditions.visibilityOf(pp.getLocationDropdownDiv()));
@@ -169,6 +167,7 @@ public class PingdomPagesMethods {
             } else {
                 try {
                     pp.clickStartTest();
+                    wait.until(ExpectedConditions.visibilityOf(pp.getPerformanceGrade()));
                 } catch (Exception ex1) {
                     tryToSelectAllPingdomPagesFields(driver, pp, site, wait);
                 }

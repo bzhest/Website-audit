@@ -29,7 +29,12 @@ public class ArtemSites {
         String motortraderVDurl = vdp.getVDurl(driver,"http://www.motortrader.co.za/new-and-used-cars-for-sale-in-south-africa.html", vdp.getMotortrader());
         String supertiresonlineVDurl = vdp.getVDurl(driver,"http://supertiresonline.com/shop-tires-tampa-clearwater.html", vdp.getSupertiresonline());
         String wallworktrucksVDurl = vdp.getVDurl(driver, "http://www.wallworktrucks.com/trucks-for-sale-inventory.html", vdp.getWallworktrucks());
-        String globalcarexchangeVDurl = vdp.getVDurl(driver, "https://www.globalcarexchange.com/cars-for-sale.html", vdp.getGlobalcarexchange());
+        String globalcarexchangeVDurl = "";
+        try{
+            globalcarexchangeVDurl += vdp.getVDurl(driver, "https://www.globalcarexchange.com/cars-for-sale.html", vdp.getGlobalcarexchange());
+        }catch(Exception ex){
+            globalcarexchangeVDurl += "https://www.globalcarexchange.com/sitemap";
+        }
         String tmxwholesaleVDurl = vdp.getVDurl(driver, "https://www.tmxwholesale.com/cars-for-sale.html", vdp.getTMX());
 
         driver.get("https://tools.pingdom.com/#!/");
@@ -52,7 +57,7 @@ public class ArtemSites {
         sitsToArtem.add("https://www.tmxwholesale.com/cars-for-sale.html");
         sitsToArtem.add(tmxwholesaleVDurl);
 
-        ppm.getPingdomSitesParameters(sitsToArtem, artemPagesPingdom,pp, driver, "csvArtem",wait);
+        ppm.getPingdomSitesParameters(sitsToArtem, artemPagesPingdom,pp, driver, "csvArtemPingdom",wait);
 
         driver.get("https://developers.google.com/speed/pagespeed/insights/");
 
