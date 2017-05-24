@@ -20,8 +20,8 @@ public class ArtemSites {
     public static void main(String[] args) {
         WebDriver driver = new ChromeDriver();
         driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
-        WebDriverWait wait = new WebDriverWait(driver, 20);
+        driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+        WebDriverWait wait = new WebDriverWait(driver, 30);
         GoogleMethods gm = new GoogleMethods();
         PingdomPages pp = PageFactory.initElements(driver, PingdomPages.class);
         VehicleDetailsPages vdp = PageFactory.initElements(driver, VehicleDetailsPages.class);

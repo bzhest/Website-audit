@@ -22,14 +22,13 @@ public class DavidSites {
 
         WebDriver driver = new ChromeDriver();
         driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
-        WebDriverWait wait = new WebDriverWait(driver, 20);
+        driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+        WebDriverWait wait = new WebDriverWait(driver, 30);
         GoogleMethods gm = new GoogleMethods();
         PingdomPages pp = PageFactory.initElements(driver, PingdomPages.class);
         GooglePages g = PageFactory.initElements(driver, GooglePages.class);
         VehicleDetailsPages vdp = PageFactory.initElements(driver, VehicleDetailsPages.class);
         PingdomPagesMethods ppm = new PingdomPagesMethods();
-
         String theeuropeanmastersVDurl = vdp.getVDurl(driver, "http://www.theeuropeanmasters.com/cars-for-sale.html", vdp.getTheeuropeanmasters());
         String inspectacargezinaVDurl = vdp.getVDurl(driver, "http://www.inspectacargezina.co.za/cars-for-sale.html", vdp.getInspectacargezina());
         String wallworktrucksVDurl = vdp.getVDurl(driver, "http://www.wallworktrucks.com/trucks-for-sale-inventory.html", vdp.getWallworktrucks());

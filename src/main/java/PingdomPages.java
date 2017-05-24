@@ -37,7 +37,7 @@ public class PingdomPages {
     private WebElement urlInput;
 
     @FindBy(how = How.LINK_TEXT,using = "try again")
-    private WebElement linkTryAgain;
+    private List <WebElement> linkTryAgain;
 
     @FindBy(how = How.CSS,using = ".rbc-summary-perfgrade .rbc-summary-info-value")
     private WebElement performanceGrade;
@@ -66,7 +66,7 @@ public class PingdomPages {
     public WebElement getLocationDropdownDiv() {
         return locationDropdownDiv.get(0);
     }
-    public WebElement getLinkTryAgain() {return linkTryAgain;}
+    public List <WebElement> getLinkTryAgain() {return linkTryAgain;}
     public WebElement getUrlInput() {return urlInput;}
     public WebElement getPerformanceGrade() {return performanceGrade;}
     public WebElement getMb() {return mb;}

@@ -148,9 +148,10 @@ public class PingdomPagesMethods {
             pp.clickStartTest();
             wait.until(ExpectedConditions.visibilityOf(pp.getPerformanceGrade()));
         } catch (Exception ex) {
-            if (pp.getLinkTryAgain() != null) {
+            //if (pp.getLinkTryAgain() != null) {
+            if (pp.getLinkTryAgain().size() !=0) {
                 try {
-                    pp.getLinkTryAgain().click();
+                    pp.getLinkTryAgain().get(0).click();
                     wait.until(ExpectedConditions.visibilityOf(pp.getLocationDropdownDiv()));
                     inputSiteSelectCountryClickStart(pp, site);
                 } catch (Exception ex1) {
