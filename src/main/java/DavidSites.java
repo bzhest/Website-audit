@@ -24,7 +24,7 @@ public class DavidSites {
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
         WebDriverWait wait = new WebDriverWait(driver, 30);
-        GoogleMethods gm = new GoogleMethods();
+        GooglePageMethods gm = new GooglePageMethods();
         PingdomPages pp = PageFactory.initElements(driver, PingdomPages.class);
         GooglePages g = PageFactory.initElements(driver, GooglePages.class);
         VehicleDetailsPages vdp = PageFactory.initElements(driver, VehicleDetailsPages.class);
