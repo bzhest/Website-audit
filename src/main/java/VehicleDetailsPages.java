@@ -56,6 +56,8 @@ public class VehicleDetailsPages {
     @FindBy(how = How.CSS, using = ".product-title-link.product_s_desc>a")
     private List<WebElement> supertiresonline;
 
+    // Competitors sites
+
 
     // David's sites methods
 
