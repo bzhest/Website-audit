@@ -61,9 +61,9 @@ public class CSVwriter {
                     oneLine.append(counter++ + ") " + g.getUrl());
                 }
                 oneLine.append(CSV_SEPARATOR);
-                oneLine.append("  Mobile: " + g.getMobileValue());
+                oneLine.append("" + g.getMobileValue());
                 oneLine.append(CSV_SEPARATOR);
-                oneLine.append(" Desktop: " + g.getDesktopValue());
+                oneLine.append("" + g.getDesktopValue());
                 bw.write(oneLine.toString());
                 bw.newLine();
             }

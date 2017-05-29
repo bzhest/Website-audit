@@ -17,7 +17,7 @@ public class PingdomPagesMethods {
     PingdomPages pp = new PingdomPages();
     WebDriver driver;
     Integer performanceGrade;
-    Double pageSize;
+    String pageSize;
     String performanceLetter;
     Double seconds;
 
@@ -36,8 +36,19 @@ public class PingdomPagesMethods {
         }
     }
 
-    public Double getPageSize(PingdomPages pp) {
-        return Double.parseDouble(pp.getMb().getAttribute("textContent").replaceAll("[^0-9.]", ""));
+    public String getPageSize(PingdomPages pp) {
+
+        Double loadNumber = Double.parseDouble(pp.getMb().getAttribute("textContent").replaceAll("[^0-9.]", ""));
+        //count number of digits before sign ',' - if it 3 digits - it KB. if 1 or 2 - it MB
+        //if it kb - cast it to mb (like from 238.1 kb to 0.2 Mb )
+        int digitsNumberBeforePoint = Integer.parseInt(String.valueOf(loadNumber).substring(0,String.valueOf(loadNumber).indexOf('.')));
+        if (digitsNumberBeforePoint < 3){
+             return String.valueOf(loadNumber).replace('.',',');
+        }else {
+            Double mb = Math.round(loadNumber) / 1000.0d;
+            mb = PingdomPagesMethods.round(mb, 1);
+            return String.valueOf(mb).replace('.',',');
+        }
     }
 
     public Integer getPerformanceGrade(PingdomPages pp) {
@@ -58,7 +69,7 @@ public class PingdomPagesMethods {
         return performanceLetter;
     }
 
-    public Double getSeconds(PingdomPages pp) {
+    public String getSeconds(PingdomPages pp) {
         List<WebElement> partLoadings = pp.getSec().get(0).findElements(By.xpath(".//*"));
         int totalLoadingTime = 0;
         for (WebElement w : partLoadings) {
@@ -67,7 +78,7 @@ public class PingdomPagesMethods {
         }
         seconds = Math.round(totalLoadingTime) / 1000.0d;
         seconds = PingdomPagesMethods.round(seconds, 1);
-        return seconds;
+        return String.valueOf(seconds).replace('.',',');
     }
 
     public void writeToCSV(ArrayList<PingdomPages> pingdomPage, String fileName) {

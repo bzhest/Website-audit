@@ -16,12 +16,12 @@ public class PingdomPages {
 
     private String performGradeLetter;
     private Integer performGradeNumber;
-    private double mbValue;
-    private double secValue;
+    private String mbValue;
+    private String secValue;
     private WebDriver driver;
     private String url;
 
-    public PingdomPages(String url, String performGradeLetter, Integer performGradeNumber, double mbValue, double secValue){
+    public PingdomPages(String url, String performGradeLetter, Integer performGradeNumber, String mbValue, String secValue){
         this.performGradeLetter = performGradeLetter;
         this.performGradeNumber = performGradeNumber;
         this.mbValue = mbValue;
@@ -76,10 +76,8 @@ public class PingdomPages {
     public Integer getPerformGradeNumber() {
         return performGradeNumber;
     }
-    public double getMbValue() {
-        return mbValue;
-    }
-    public double getSecValue() {
+    public String getMbValue() {return mbValue;}
+    public String getSecValue() {
         return secValue;
     }
     public List<WebElement> getSec() {return sec;}

@@ -17,12 +17,15 @@ public class GooglePageMethods {
         for (String site : sites) {
 
             pp.inputText(g.getUrlInput(), site);
+            System.out.println(site);
             g.getButtonAnalize().click();
             wait.until(ExpectedConditions.visibilityOf(g.getMobileTab()));
             g.getMobileTab().click();
             String mobileValue = g.getNumberMobile().getAttribute("textContent").replace(" / 100","");
+            System.out.println("On mob.: " + mobileValue);
             g.getDesktopTab().click();
             String desktopValue = g.getNumberDesktop().getAttribute("textContent").replace(" / 100","");
+            System.out.println("On desk.: " + desktopValue);
             googlePages.add(new GooglePages(site, mobileValue,desktopValue));
             writeToCSV(googlePages,csvFileName);
         }
