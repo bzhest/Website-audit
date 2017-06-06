@@ -47,7 +47,7 @@ public class DavidSites {
         String carkingdirectVDurl = vdp.getVDurl(driver, "http://www.carkingdirect.co.za/cars-for-sale.html", vdp.getCarkingdirect());
         String motortrucksVDurl = vdp.getVDurl(driver, "http://www.motortrucks.com/trucks-for-sale_condition_2.html", vdp.getMotortrucks());
 
-        //driver.get("https://tools.pingdom.com/#!/");
+        driver.get("https://tools.pingdom.com/#!/");
 
         sitsToDavid.add("http://www.theeuropeanmasters.com/");
         sitsToDavid.add("http://www.theeuropeanmasters.com/cars-for-sale.html");
@@ -86,7 +86,7 @@ public class DavidSites {
         sitsToDavid.add("http://www.motortrucks.com/trucks-for-sale_condition_2.html");
         sitsToDavid.add(motortrucksVDurl);
 
-        //ppm.getPingdomSitesParameters(sitsToDavid, davidPagesPingdom, pp, driver, "csvDavidPingdom", wait);
+        ppm.getPingdomSitesParameters(sitsToDavid, davidPagesPingdom, pp, driver, "csvDavidPingdom", wait);
 
         driver.get("https://developers.google.com/speed/pagespeed/insights/");
 
