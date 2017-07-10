@@ -44,7 +44,7 @@ public class DavidSites {
         } catch (Exception ex) {
             globalcarexchangeVDurl += "https://www.globalcarexchange.com/sitemap";
         }
-        String carkingdirectVDurl = vdp.getVDurl(driver, "http://www.carkingdirect.co.za/cars-for-sale.html", vdp.getCarkingdirect());
+        String carkingdirectVDurl = vdp.getVDurlForKingofcars(driver, "http://www.carkingdirect.co.za/used-models","http://www.carkingdirect.co.za", vdp.getCarkingdirect());
         String motortrucksVDurl = vdp.getVDurl(driver, "http://www.motortrucks.com/trucks-for-sale_condition_2.html", vdp.getMotortrucks());
 
         driver.get("https://tools.pingdom.com/#!/");
@@ -80,7 +80,7 @@ public class DavidSites {
         sitsToDavid.add("https://www.globalcarexchange.com/cars-for-sale.html");
         sitsToDavid.add(globalcarexchangeVDurl);
         sitsToDavid.add("http://www.carkingdirect.co.za");
-        sitsToDavid.add("http://www.carkingdirect.co.za/cars-for-sale.html");
+        sitsToDavid.add("http://www.carkingdirect.co.za/used-models");
         sitsToDavid.add(carkingdirectVDurl);
         sitsToDavid.add("http://www.motortrucks.com");
         sitsToDavid.add("http://www.motortrucks.com/trucks-for-sale_condition_2.html");

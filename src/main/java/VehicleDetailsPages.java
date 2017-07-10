@@ -1,3 +1,4 @@
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -73,34 +74,61 @@ public class VehicleDetailsPages {
         return wallworktrucks;
     }
 
-    public List<WebElement> getEastcountypreowned() {return eastcountypreowned;}
+    public List<WebElement> getEastcountypreowned() {
+        return eastcountypreowned;
+    }
 
-    public List<WebElement> getZidocars() {return zidocars;}
+    public List<WebElement> getZidocars() {
+        return zidocars;
+    }
 
-    public List<WebElement> getGenuinemotorcars() {return genuinemotorcars;}
+    public List<WebElement> getGenuinemotorcars() {
+        return genuinemotorcars;
+    }
 
-    public List<WebElement> getTMX() {return tmx;}
+    public List<WebElement> getTMX() {
+        return tmx;
+    }
 
-    public List<WebElement> getKenworthnorthwest() {return kenworthnorthwest;}
+    public List<WebElement> getKenworthnorthwest() {
+        return kenworthnorthwest;
+    }
 
-    public List<WebElement> getAuctiondemo() {return auctiondemo;}
+    public List<WebElement> getAuctiondemo() {
+        return auctiondemo;
+    }
 
-    public List<WebElement> getGlobalcarexchange() {return globalcarexchange;}
+    public List<WebElement> getGlobalcarexchange() {
+        return globalcarexchange;
+    }
 
-    public List<WebElement> getCarkingdirect() {return carkingdirect;}
+    public List<WebElement> getCarkingdirect() {
+        return carkingdirect;
+    }
 
-    public List<WebElement> getMotortrucks() {return motortrucks;}
+    public List<WebElement> getMotortrucks() {
+        return motortrucks;
+    }
 
     // Artems's sites methods
 
-    public List<WebElement> getMotortrader() {return motortrader;}
+    public List<WebElement> getMotortrader() {
+        return motortrader;
+    }
 
-    public List<WebElement> getSupertiresonline() {return supertiresonline;}
+    public List<WebElement> getSupertiresonline() {
+        return supertiresonline;
+    }
 
 
-
-    public String getVDurl(WebDriver driver, String inventoryURL, List <WebElement> carLink){
+    public String getVDurl(WebDriver driver, String inventoryURL, List<WebElement> carLink) {
         driver.get(inventoryURL);
         return carLink.get(0).getAttribute("href");
+    }
+
+    public String getVDurlForKingofcars(WebDriver driver, String inventoryURL, String homeURL, List<WebElement> carLink) {
+        driver.get(inventoryURL);
+        String pass = driver.findElements(By.cssSelector(".vehicle_search_results_item")).get(0).findElements(By.tagName("a")).get(0).getAttribute("id");
+        return (homeURL + pass);
     }
 }
