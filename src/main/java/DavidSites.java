@@ -47,6 +47,7 @@ public class DavidSites {
         }
         String carkingdirectVDurl = vdp.getVDurlForKingofcars(driver, "http://www.carkingdirect.co.za/used-models","http://www.carkingdirect.co.za", vdp.getCarkingdirect());
         String motortrucksVDurl = vdp.getVDurl(driver, "http://www.motortrucks.com/trucks-for-sale_condition_2.html", vdp.getMotortrucks());
+        String autoExpo4VDurl = vdp.getVDurl(driver, "http://www.autoexpo4.com/cars-for-sale.html", vdp.getAutoExpo4());
 
         driver.get("https://tools.pingdom.com/#!/");
 
@@ -86,6 +87,9 @@ public class DavidSites {
         sitsToDavid.add("http://www.motortrucks.com");
         sitsToDavid.add("http://www.motortrucks.com/trucks-for-sale_condition_2.html");
         sitsToDavid.add(motortrucksVDurl);
+        sitsToDavid.add("http://www.autoexpo4.com/");
+        sitsToDavid.add("http://www.autoexpo4.com/cars-for-sale.html");
+        sitsToDavid.add(autoExpo4VDurl);
 
         ppm.getPingdomSitesParameters(sitsToDavid, davidPagesPingdom, pp, driver, "csvDavidPingdom", wait);
 

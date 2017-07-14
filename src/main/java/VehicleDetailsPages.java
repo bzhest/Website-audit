@@ -57,6 +57,9 @@ public class VehicleDetailsPages {
     @FindBy(how = How.CSS, using = ".product-title-link.product_s_desc>a")
     private List<WebElement> supertiresonline;
 
+    @FindBy(how = How.CSS, using = ".h4.text-primary.vehicle-title")
+    private List<WebElement> autoexpo4;
+
     // Competitors sites
 
 
@@ -108,6 +111,10 @@ public class VehicleDetailsPages {
 
     public List<WebElement> getMotortrucks() {
         return motortrucks;
+    }
+
+    public List<WebElement> getAutoExpo4() {
+        return autoexpo4;
     }
 
     // Artems's sites methods
