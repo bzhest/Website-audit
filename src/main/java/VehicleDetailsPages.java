@@ -60,6 +60,9 @@ public class VehicleDetailsPages {
     @FindBy(how = How.CSS, using = ".h4.text-primary.vehicle-title")
     private List<WebElement> autoexpo4;
 
+    @FindBy(css = ".h4.text-primary.vehicle-title")
+    private List<WebElement> autoexpostore;
+
     // Competitors sites
 
 
@@ -121,6 +124,10 @@ public class VehicleDetailsPages {
 
     public List<WebElement> getMotortrader() {
         return motortrader;
+    }
+
+    public List<WebElement> getAutoexpostore() {
+        return autoexpostore;
     }
 
     public List<WebElement> getSupertiresonline() {
