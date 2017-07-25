@@ -21,7 +21,7 @@ public class ArtemSites {
         WebDriver driver = new ChromeDriver();
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-        WebDriverWait wait = new WebDriverWait(driver, 30);
+        WebDriverWait wait = new WebDriverWait(driver, 50);
         GooglePageMethods gm = new GooglePageMethods();
         PingdomPages pp = PageFactory.initElements(driver, PingdomPages.class);
         VehicleDetailsPages vdp = PageFactory.initElements(driver, VehicleDetailsPages.class);
@@ -38,6 +38,7 @@ public class ArtemSites {
             globalcarexchangeVDurl += "https://www.globalcarexchange.com/sitemap";
         }
         String tmxwholesaleVDurl = vdp.getVDurl(driver, "https://www.tmxwholesale.com/cars-for-sale.html", vdp.getTMX());
+        String autoexpostoreVDurl = vdp.getVDurl(driver,"http://www.autoexpostore.com/cars-for-sale.html", vdp.getAutoexpostore());
 
         driver.get("https://tools.pingdom.com/#!/");
 
@@ -58,6 +59,9 @@ public class ArtemSites {
         sitsToArtem.add("https://www.tmxwholesale.com/");
         sitsToArtem.add("https://www.tmxwholesale.com/cars-for-sale.html");
         sitsToArtem.add(tmxwholesaleVDurl);
+        sitsToArtem.add("http://www.autoexpostore.com");
+        sitsToArtem.add("http://www.autoexpostore.com/cars-for-sale.html");
+        sitsToArtem.add(autoexpostoreVDurl);
 
         ppm.getPingdomSitesParameters(sitsToArtem, artemPagesPingdom,pp, driver, "csvArtemPingdom",wait);
 
