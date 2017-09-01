@@ -31,24 +31,18 @@ public class DavidSites {
         PingdomPagesMethods ppm = new PingdomPagesMethods();
 
         String theeuropeanmastersVDurl = vdp.getVDurl(driver, "http://www.theeuropeanmasters.com/cars-for-sale.html", vdp.getTheeuropeanmasters());
-       /* String inspectacargezinaVDurl = vdp.getVDurl(driver, "http://www.inspectacargezina.co.za/cars-for-sale.html", vdp.getInspectacargezina());
+        /*String inspectacargezinaVDurl = vdp.getVDurl(driver, "http://www.inspectacargezina.co.za/cars-for-sale.html", vdp.getInspectacargezina());
         String wallworktrucksVDurl = vdp.getVDurl(driver, "http://www.wallworktrucks.com/trucks-for-sale-inventory.html", vdp.getWallworktrucks());*/
         String eastcountypreownedVDurl = vdp.getVDurl(driver, "http://www.eastcountypreowned.com/cars-for-sale.html", vdp.getEastcountypreowned());
-        String zidocarsVDurl = vdp.getVDurl(driver, "http://www.zidocars.co.za/cars-for-sale.html", vdp.getZidocars());
+        /*String zidocarsVDurl = vdp.getVDurl(driver, "http://www.zidocars.co.za/cars-for-sale.html", vdp.getZidocars());
         String genuinemotorcarsVDurl = vdp.getVDurl(driver, "http://www.genuinemotorcars.com/cars-for-sale.html", vdp.getGenuinemotorcars());
-       /* String tmxwholesaleVDurl = vdp.getVDurl(driver, "https://www.tmxwholesale.com/cars-for-sale.html", vdp.getTMX());
-        String kenworthnorthwestVDurl = vdp.getVDurl(driver, "http://www.kenworthnorthwest.com/trucks-for-sale_condition_2.html", vdp.getKenworthnorthwest());*/
+        String tmxwholesaleVDurl = vdp.getVDurl(driver, "https://www.tmxwholesale.com/cars-for-sale.html", vdp.getTMX());
+        String kenworthnorthwestVDurl = vdp.getVDurl(driver, "http://www.kenworthnorthwest.com/trucks-for-sale_condition_2.html", vdp.getKenworthnorthwest());
         String auctiondemoVDurl = vdp.getVDurl(driver, "http://www.auctiondemo.ixloo.com/presaleinventory", vdp.getAuctiondemo());
         String globalcarexchangeVDurl = vdp.getVDurl(driver, "https://www.globalcarexchange.com/cars-for-sale.html", vdp.getGlobalcarexchange());
-        /*String globalcarexchangeVDurl = "";
-        try {
-            globalcarexchangeVDurl += vdp.getVDurl(driver, "https://www.globalcarexchange.com/cars-for-sale.html", vdp.getGlobalcarexchange());
-        } catch (Exception ex) {
-            globalcarexchangeVDurl += "https://www.globalcarexchange.com/sitemap";
-        }*/
         String carkingdirectVDurl = vdp.getVDurlForKingofcars(driver, "http://www.carkingdirect.co.za/used-models","http://www.carkingdirect.co.za", vdp.getCarkingdirect());
         String motortrucksVDurl = vdp.getVDurl(driver, "http://www.motortrucks.com/trucks-for-sale_condition_2.html", vdp.getMotortrucks());
-        String autoExpo4VDurl = vdp.getVDurl(driver, "http://www.autoexpo4.com/cars-for-sale.html", vdp.getAutoExpo4());
+        String autoExpo4VDurl = vdp.getVDurl(driver, "http://www.autoexpo4.com/cars-for-sale.html", vdp.getAutoExpo4());*/
 
         driver.get("https://tools.pingdom.com/#!/");
 
@@ -64,41 +58,44 @@ public class DavidSites {
         sitsToDavid.add("http://www.eastcountypreowned.com/");
         sitsToDavid.add("http://www.eastcountypreowned.com/cars-for-sale.html");
         sitsToDavid.add(eastcountypreownedVDurl);
-        sitsToDavid.add("http://www.zidocars.co.za/");
+        /*sitsToDavid.add("http://www.zidocars.co.za/");
         sitsToDavid.add("http://www.zidocars.co.za/cars-for-sale.html");
         sitsToDavid.add(zidocarsVDurl);
         sitsToDavid.add("http://www.genuinemotorcars.com/");
         sitsToDavid.add("http://www.genuinemotorcars.com/cars-for-sale.html");
         sitsToDavid.add(genuinemotorcarsVDurl);
-        /*sitsToDavid.add("https://www.tmxwholesale.com/");
+        sitsToDavid.add("https://www.tmxwholesale.com/");
         sitsToDavid.add("https://www.tmxwholesale.com/cars-for-sale.html");
         sitsToDavid.add(tmxwholesaleVDurl);
         sitsToDavid.add("http://www.kenworthnorthwest.com/");
         sitsToDavid.add("http://www.kenworthnorthwest.com/trucks-for-sale_condition_2.html");
-        sitsToDavid.add(kenworthnorthwestVDurl);*/
+        sitsToDavid.add(kenworthnorthwestVDurl);
         sitsToDavid.add("http://www.auctiondemo.ixloo.com/");
         sitsToDavid.add("http://www.auctiondemo.ixloo.com/presaleinventory");
         sitsToDavid.add(auctiondemoVDurl);
         sitsToDavid.add("http://www.globalcarexchange.com/");
         sitsToDavid.add("https://www.globalcarexchange.com/cars-for-sale.html");
         sitsToDavid.add(globalcarexchangeVDurl);
-        sitsToDavid.add("http://www.carkingdirect.co.za");
-        sitsToDavid.add("http://www.carkingdirect.co.za/used-models");
-        sitsToDavid.add(carkingdirectVDurl);
         sitsToDavid.add("http://www.motortrucks.com");
         sitsToDavid.add("http://www.motortrucks.com/trucks-for-sale_condition_2.html");
         sitsToDavid.add(motortrucksVDurl);
         sitsToDavid.add("http://www.autoexpo4.com/");
         sitsToDavid.add("http://www.autoexpo4.com/cars-for-sale.html");
-        sitsToDavid.add(autoExpo4VDurl);
+        sitsToDavid.add(autoExpo4VDurl);*/
 
         ppm.getPingdomSitesParameters(sitsToDavid, davidPagesPingdom, pp, driver, "csvDavidPingdom", wait);
 
         driver.get("https://developers.google.com/speed/pagespeed/insights/");
 
         gm.getGoogleSitesParameters(sitsToDavid, davidPagesGooglePages, g, "csvDavidGoogle", pp, wait);
-
-
     }
 
 }
+
+
+/*String globalcarexchangeVDurl = "";
+        try {
+            globalcarexchangeVDurl += vdp.getVDurl(driver, "https://www.globalcarexchange.com/cars-for-sale.html", vdp.getGlobalcarexchange());
+        } catch (Exception ex) {
+            globalcarexchangeVDurl += "https://www.globalcarexchange.com/sitemap";
+        }*/

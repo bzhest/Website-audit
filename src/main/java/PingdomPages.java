@@ -93,7 +93,18 @@ public class PingdomPages {
     public void clickOnLocationDropdown(){
         locationDropdownDiv.get(0).click();
     }
-    public void clickOnLocationUSA(){locationUSA.get(0).click();}
+    public void clickOnLocationUSA(){
+        for(WebElement a : locationUSA){
+            try{
+                if(a.getText().contains("California")){
+                    a.click();
+                }
+            }catch(Exception ex){
+                locationUSA.get(0).click();
+            }
+        }
+
+    }
     public void clickStartTest(){startTest.click();}
 
     public static void selectByText(WebElement element, String text) {
