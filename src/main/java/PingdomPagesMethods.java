@@ -159,31 +159,44 @@ public class PingdomPagesMethods {
             pp.clickStartTest();
             wait.until(ExpectedConditions.visibilityOf(pp.getPerformanceGrade()));
         } catch (Exception ex) {
-            //if (pp.getLinkTryAgain() != null) {
             if (pp.getLinkTryAgain().size() !=0) {
-                try {
-                    pp.getLinkTryAgain().get(0).click();
-                    wait.until(ExpectedConditions.visibilityOf(pp.getLocationDropdownDiv()));
-                    inputSiteSelectCountryClickStart(pp, site);
-                } catch (Exception ex1) {
-                    tryToSelectAllPingdomPagesFields(driver, pp, site, wait);
-                }
+                clickLinkTryAgain(driver, pp, site, wait);
             } else if (!pp.getButtonClickStartTest().isDisplayed()) {
-                try {
-                    driver.get(driver.getCurrentUrl());
-                    wait.until(ExpectedConditions.visibilityOf(pp.getLocationDropdownDiv()));
-                    inputSiteSelectCountryClickStart(pp, site);
-                } catch (Exception ex1) {
-                    tryToSelectAllPingdomPagesFields(driver, pp, site, wait);
-                }
+                refreshPage_StartTestAgain(driver, pp, site, wait);
             } else {
-                try {
-                    pp.clickStartTest();
-                    wait.until(ExpectedConditions.visibilityOf(pp.getPerformanceGrade()));
-                } catch (Exception ex1) {
-                    tryToSelectAllPingdomPagesFields(driver, pp, site, wait);
-                }
+                clickStartTest(driver, pp, site, wait);
             }
+        }
+    }
+
+    private void clickStartTest(WebDriver driver, PingdomPages pp, String site, WebDriverWait wait) {
+        try {
+            pp.clickStartTest();
+            wait.until(ExpectedConditions.visibilityOf(pp.getPerformanceGrade()));
+        } catch (Exception ex1) {
+            tryToSelectAllPingdomPagesFields(driver, pp, site, wait);
+        }
+    }
+
+    private void refreshPage_StartTestAgain(WebDriver driver, PingdomPages pp, String site, WebDriverWait wait) {
+        try {
+            driver.get(driver.getCurrentUrl());
+            wait.until(ExpectedConditions.visibilityOf(pp.getLocationDropdownDiv()));
+            inputSiteSelectCountryClickStart(pp, site);
+            wait.until(ExpectedConditions.visibilityOf(pp.getPerformanceGrade()));
+        } catch (Exception ex1) {
+            tryToSelectAllPingdomPagesFields(driver, pp, site, wait);
+        }
+    }
+
+    private void clickLinkTryAgain(WebDriver driver, PingdomPages pp, String site, WebDriverWait wait) {
+        try {
+            pp.getLinkTryAgain().get(0).click();
+            wait.until(ExpectedConditions.visibilityOf(pp.getLocationDropdownDiv()));
+            inputSiteSelectCountryClickStart(pp, site);
+            wait.until(ExpectedConditions.visibilityOf(pp.getPerformanceGrade()));
+        } catch (Exception ex1) {
+            tryToSelectAllPingdomPagesFields(driver, pp, site, wait);
         }
     }
 }

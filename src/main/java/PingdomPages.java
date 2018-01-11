@@ -9,6 +9,7 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import javax.swing.*;
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -22,6 +23,8 @@ public class PingdomPages {
     private String secValue;
     private WebDriver driver;
     private String url;
+
+
 
     public PingdomPages(String url, String performGradeLetter, Integer performGradeNumber, String mbValue, String secValue){
         this.performGradeLetter = performGradeLetter;

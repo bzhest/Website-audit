@@ -31,34 +31,33 @@ public class DavidSites {
         PingdomPagesMethods ppm = new PingdomPagesMethods();
 
         String theeuropeanmastersVDurl = vdp.getVDurl(driver, "http://www.theeuropeanmasters.com/cars-for-sale.html", vdp.getTheeuropeanmasters());
-        /*String inspectacargezinaVDurl = vdp.getVDurl(driver, "http://www.inspectacargezina.co.za/cars-for-sale.html", vdp.getInspectacargezina());
-        String wallworktrucksVDurl = vdp.getVDurl(driver, "http://www.wallworktrucks.com/trucks-for-sale-inventory.html", vdp.getWallworktrucks());*/
+        String inspectacargezinaVDurl = vdp.getVDurl(driver, "http://www.inspectacargezina.co.za/cars-for-sale.html", vdp.getInspectacargezina());
+        String wallworktrucksVDurl = vdp.getVDurl(driver, "http://www.wallworktrucks.com/trucks-for-sale-inventory.html", vdp.getWallworktrucks());
         String eastcountypreownedVDurl = vdp.getVDurl(driver, "http://www.eastcountypreowned.com/cars-for-sale.html", vdp.getEastcountypreowned());
-        /*String zidocarsVDurl = vdp.getVDurl(driver, "http://www.zidocars.co.za/cars-for-sale.html", vdp.getZidocars());
+        String zidocarsVDurl = vdp.getVDurl(driver, "http://www.zidocars.co.za/cars-for-sale.html", vdp.getZidocars());
         String genuinemotorcarsVDurl = vdp.getVDurl(driver, "http://www.genuinemotorcars.com/cars-for-sale.html", vdp.getGenuinemotorcars());
         String tmxwholesaleVDurl = vdp.getVDurl(driver, "https://www.tmxwholesale.com/cars-for-sale.html", vdp.getTMX());
         String kenworthnorthwestVDurl = vdp.getVDurl(driver, "http://www.kenworthnorthwest.com/trucks-for-sale_condition_2.html", vdp.getKenworthnorthwest());
         String auctiondemoVDurl = vdp.getVDurl(driver, "http://www.auctiondemo.ixloo.com/presaleinventory", vdp.getAuctiondemo());
         String globalcarexchangeVDurl = vdp.getVDurl(driver, "https://www.globalcarexchange.com/cars-for-sale.html", vdp.getGlobalcarexchange());
-        String carkingdirectVDurl = vdp.getVDurlForKingofcars(driver, "http://www.carkingdirect.co.za/used-models","http://www.carkingdirect.co.za", vdp.getCarkingdirect());
         String motortrucksVDurl = vdp.getVDurl(driver, "http://www.motortrucks.com/trucks-for-sale_condition_2.html", vdp.getMotortrucks());
-        String autoExpo4VDurl = vdp.getVDurl(driver, "http://www.autoexpo4.com/cars-for-sale.html", vdp.getAutoExpo4());*/
+        String autoExpo4VDurl = vdp.getVDurl(driver, "http://www.autoexpo4.com/cars-for-sale.html", vdp.getAutoExpo4());
 
         driver.get("https://tools.pingdom.com/#!/");
 
         sitsToDavid.add("http://www.theeuropeanmasters.com/");
         sitsToDavid.add("http://www.theeuropeanmasters.com/cars-for-sale.html");
         sitsToDavid.add(theeuropeanmastersVDurl);
-        /*sitsToDavid.add("http://www.inspectacargezina.co.za/");
+        sitsToDavid.add("http://www.inspectacargezina.co.za/");
         sitsToDavid.add("http://www.inspectacargezina.co.za/cars-for-sale.html");
         sitsToDavid.add(inspectacargezinaVDurl);
         sitsToDavid.add("http://www.wallworktrucks.com/");
         sitsToDavid.add("http://www.wallworktrucks.com/trucks-for-sale-inventory.html");
-        sitsToDavid.add(wallworktrucksVDurl);*/
+        sitsToDavid.add(wallworktrucksVDurl);
         sitsToDavid.add("http://www.eastcountypreowned.com/");
         sitsToDavid.add("http://www.eastcountypreowned.com/cars-for-sale.html");
         sitsToDavid.add(eastcountypreownedVDurl);
-        /*sitsToDavid.add("http://www.zidocars.co.za/");
+        sitsToDavid.add("http://www.zidocars.co.za/");
         sitsToDavid.add("http://www.zidocars.co.za/cars-for-sale.html");
         sitsToDavid.add(zidocarsVDurl);
         sitsToDavid.add("http://www.genuinemotorcars.com/");
@@ -81,7 +80,7 @@ public class DavidSites {
         sitsToDavid.add(motortrucksVDurl);
         sitsToDavid.add("http://www.autoexpo4.com/");
         sitsToDavid.add("http://www.autoexpo4.com/cars-for-sale.html");
-        sitsToDavid.add(autoExpo4VDurl);*/
+        sitsToDavid.add(autoExpo4VDurl);
 
         ppm.getPingdomSitesParameters(sitsToDavid, davidPagesPingdom, pp, driver, "csvDavidPingdom", wait);
 
@@ -99,3 +98,5 @@ public class DavidSites {
         } catch (Exception ex) {
             globalcarexchangeVDurl += "https://www.globalcarexchange.com/sitemap";
         }*/
+
+    //String carkingdirectVDurl = vdp.getVDurlForKingofcars(driver, "http://www.carkingdirect.co.za/used-models","http://www.carkingdirect.co.za", vdp.getCarkingdirect());
