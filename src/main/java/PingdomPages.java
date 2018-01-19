@@ -66,6 +66,9 @@ public class PingdomPages {
     @FindBy(how = How.CSS,using = "li[data-country = 'USA']")
     private List<WebElement> locationUSA;
 
+    @FindBy(how = How.CSS,using = "li[data-country = 'USA']")
+    private List<WebElement> mbOrKb;
+
     //Methods------------------------------------------------------------------------------------
 
     //

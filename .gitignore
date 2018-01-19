@@ -1,4 +1,10 @@
 .idea/
 *.iml
 target
+csvArtemGoogle
+csvArtemPingdom
+csvArtemTestMySite
+csvDavidGoogle
+csvDavidPingdom
+csvDavidTestMySite
 

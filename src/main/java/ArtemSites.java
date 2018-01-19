@@ -27,6 +27,7 @@ public class ArtemSites {
         VehicleDetailsPages vdp = PageFactory.initElements(driver, VehicleDetailsPages.class);
         GooglePages g = PageFactory.initElements(driver, GooglePages.class);
         PingdomPagesMethods ppm = new PingdomPagesMethods();
+        TestMySitePages testMySitePages = PageFactory.initElements(driver, TestMySitePages.class);
 
         String motortraderVDurl = vdp.getVDurl(driver,"http://www.motortrader.co.za/new-and-used-cars-for-sale-in-south-africa.html", vdp.getMotortrader());
         String supertiresonlineVDurl = vdp.getVDurl(driver,"http://supertiresonline.com/shop-tires-tampa-clearwater.html", vdp.getSupertiresonline());
@@ -35,7 +36,7 @@ public class ArtemSites {
         String tmxwholesaleVDurl = vdp.getVDurl(driver, "https://www.tmxwholesale.com/cars-for-sale.html", vdp.getTMX());
         String autoexpostoreVDurl = vdp.getVDurl(driver,"http://www.autoexpostore.com/cars-for-sale.html", vdp.getAutoexpostore());
 
-        driver.get("https://tools.pingdom.com/#!/");
+
 
         sitsToArtem.add("http://www.wallworktrucks.com/");
         sitsToArtem.add("http://www.wallworktrucks.com/trucks-for-sale-inventory.html");
@@ -58,11 +59,16 @@ public class ArtemSites {
         sitsToArtem.add("http://www.autoexpostore.com/cars-for-sale.html");
         sitsToArtem.add(autoexpostoreVDurl);
 
-        ppm.getPingdomSitesParameters(sitsToArtem, artemPagesPingdom,pp, driver, "csvArtemPingdom",wait);
+        /*driver.get("https://tools.pingdom.com/#!/");
+        ppm.getPingdomSitesParameters(sitsToArtem, artemPagesPingdom,pp, driver, "csvArtemPingdom",wait);*/
 
-        driver.get("https://developers.google.com/speed/pagespeed/insights/");
+        //-----------------
+        driver.get("https://testmysite.withgoogle.com/intl/en-gb");
+        testMySitePages.getLoadingTime(sitsToArtem,driver,"csvArtemTestMySite");
+        //----------------
 
-        gm.getGoogleSitesParameters(sitsToArtem, artemPagesGooglePages, g, "csvArtemGoogle", pp, wait);
+        /*driver.get("https://developers.google.com/speed/pagespeed/insights/");
+        gm.getGoogleSitesParameters(sitsToArtem, artemPagesGooglePages, g, "csvArtemGoogle", pp, wait);*/
     }
 }
 

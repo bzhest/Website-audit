@@ -1,6 +1,7 @@
 import org.apache.commons.lang3.StringUtils;
 
 import java.io.*;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -69,6 +70,26 @@ public class CSVwriter {
             }
             bw.flush();
             bw.close();
+        } catch (UnsupportedEncodingException e) {
+        } catch (FileNotFoundException e) {
+        } catch (IOException e) {
+        }
+    }
+
+    public void testMySiteToCSV(ArrayList<String> sites, ArrayList<String> times, String fileName) {
+        try {
+            BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(fileName), "UTF-8"));
+                for (int i = 0; i < times.size(); i++) {
+                    StringBuffer oneLine = new StringBuffer();
+                    oneLine.append(sites.get(i));
+                    oneLine.append(CSV_SEPARATOR);
+                    oneLine.append(times.get(i));
+                    bw.write(oneLine.toString());
+                    bw.newLine();
+               }
+            bw.flush();
+            bw.close();
+
         } catch (UnsupportedEncodingException e) {
         } catch (FileNotFoundException e) {
         } catch (IOException e) {

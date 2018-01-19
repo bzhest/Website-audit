@@ -29,6 +29,7 @@ public class DavidSites {
         GooglePages g = PageFactory.initElements(driver, GooglePages.class);
         VehicleDetailsPages vdp = PageFactory.initElements(driver, VehicleDetailsPages.class);
         PingdomPagesMethods ppm = new PingdomPagesMethods();
+        TestMySitePages testMySitePages = PageFactory.initElements(driver, TestMySitePages.class);
 
         String theeuropeanmastersVDurl = vdp.getVDurl(driver, "http://www.theeuropeanmasters.com/cars-for-sale.html", vdp.getTheeuropeanmasters());
         String inspectacargezinaVDurl = vdp.getVDurl(driver, "http://www.inspectacargezina.co.za/cars-for-sale.html", vdp.getInspectacargezina());
@@ -43,7 +44,6 @@ public class DavidSites {
         String motortrucksVDurl = vdp.getVDurl(driver, "http://www.motortrucks.com/trucks-for-sale_condition_2.html", vdp.getMotortrucks());
         String autoExpo4VDurl = vdp.getVDurl(driver, "http://www.autoexpo4.com/cars-for-sale.html", vdp.getAutoExpo4());
 
-        driver.get("https://tools.pingdom.com/#!/");
 
         sitsToDavid.add("http://www.theeuropeanmasters.com/");
         sitsToDavid.add("http://www.theeuropeanmasters.com/cars-for-sale.html");
@@ -82,11 +82,16 @@ public class DavidSites {
         sitsToDavid.add("http://www.autoexpo4.com/cars-for-sale.html");
         sitsToDavid.add(autoExpo4VDurl);
 
+        driver.get("https://tools.pingdom.com/#!/");
         ppm.getPingdomSitesParameters(sitsToDavid, davidPagesPingdom, pp, driver, "csvDavidPingdom", wait);
 
-        driver.get("https://developers.google.com/speed/pagespeed/insights/");
+        //-----------------
+        /*driver.get("https://testmysite.withgoogle.com/intl/en-gb");
+        testMySitePages.getLoadingTime(sitsToDavid,driver,"csvDavidTestMySite");*/
+        //----------------
 
-        gm.getGoogleSitesParameters(sitsToDavid, davidPagesGooglePages, g, "csvDavidGoogle", pp, wait);
+        /*driver.get("https://developers.google.com/speed/pagespeed/insights/");
+        gm.getGoogleSitesParameters(sitsToDavid, davidPagesGooglePages, g, "csvDavidGoogle", pp, wait);*/
     }
 
 }

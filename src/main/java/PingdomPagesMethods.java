@@ -39,12 +39,11 @@ public class PingdomPagesMethods {
     public String getPageSize(PingdomPages pp) {
 
         Double loadNumber = Double.parseDouble(pp.getMb().getAttribute("textContent").replaceAll("[^0-9.]", ""));
-        //count number of digits before sign ',' - if it 3 digits - it KB. if 1 or 2 - it MB
-        //if it kb - cast it to mb (like from 238.1 kb to 0.2 Mb )
-        int digitsNumberBeforePoint = Integer.parseInt(String.valueOf(loadNumber).substring(0,String.valueOf(loadNumber).indexOf('.')));
-        if (digitsNumberBeforePoint < 3){
-             return String.valueOf(loadNumber).replace('.',',');
-        }else {
+
+        //if it KB - cast it to MB (like from 238.1 KB to 0.2 MB )
+        if(pp.getMb().getText().contains("MB")){
+            return String.valueOf(loadNumber).replace('.',',');
+        }else{
             Double mb = Math.round(loadNumber) / 1000.0d;
             mb = PingdomPagesMethods.round(mb, 1);
             return String.valueOf(mb).replace('.',',');
