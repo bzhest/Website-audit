@@ -52,7 +52,7 @@ public class DavidSites {
         sitsToDavid.add("http://www.inspectacargezina.co.za/cars-for-sale.html");
         sitsToDavid.add(inspectacargezinaVDurl);
         sitsToDavid.add("http://www.wallworktrucks.com/");
-        sitsToDavid.add("http://www.wallworktrucks.com/trucks-for-sale-inventory.html");
+        sitsToDavid.add("https://www.wallworktrucks.com/trucks-for-sale.html");
         sitsToDavid.add(wallworktrucksVDurl);
         sitsToDavid.add("http://www.eastcountypreowned.com/");
         sitsToDavid.add("http://www.eastcountypreowned.com/cars-for-sale.html");
@@ -82,16 +82,17 @@ public class DavidSites {
         sitsToDavid.add("http://www.autoexpo4.com/cars-for-sale.html");
         sitsToDavid.add(autoExpo4VDurl);
 
+        //--------------------PINGDOM--------------
         driver.get("https://tools.pingdom.com/#!/");
         ppm.getPingdomSitesParameters(sitsToDavid, davidPagesPingdom, pp, driver, "csvDavidPingdom", wait);
 
-        //-----------------
-        /*driver.get("https://testmysite.withgoogle.com/intl/en-gb");
-        testMySitePages.getLoadingTime(sitsToDavid,driver,"csvDavidTestMySite");*/
-        //----------------
+        //------------------GOOGLE Test My Site--------
+        driver.get("https://testmysite.withgoogle.com/intl/en-gb");
+        testMySitePages.getLoadingTime(sitsToDavid,driver,"csvDavidTestMySite");
 
-        /*driver.get("https://developers.google.com/speed/pagespeed/insights/");
-        gm.getGoogleSitesParameters(sitsToDavid, davidPagesGooglePages, g, "csvDavidGoogle", pp, wait);*/
+        //-------------------GOOGLE Insights----------
+        driver.get("https://developers.google.com/speed/pagespeed/insights/");
+        gm.getGoogleSitesParameters(sitsToDavid, davidPagesGooglePages, g, "csvDavidGoogle", pp, wait);
     }
 
 }

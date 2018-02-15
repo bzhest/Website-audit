@@ -87,7 +87,7 @@ public class PingdomPagesMethods {
 
     public void createPingdomPageObject(ArrayList<PingdomPages> pingdomPage, String site, PingdomPages pp) {
         pingdomPage.add(new PingdomPages(site, getPerformanceLetter(getPerformanceGrade(pp)), getPerformanceGrade(pp), getPageSize(pp), getSeconds(pp)));
-        System.out.println(pingdomPage);
+        //System.out.println(pingdomPage);
     }
 
     public void calculateLoadTime(PingdomPages pp) {
@@ -97,15 +97,16 @@ public class PingdomPagesMethods {
             int loadingTime = Integer.parseInt(w.getAttribute("textContent").replaceAll("\\D+", ""));
             totalLoadingTime += loadingTime;
         }
-        System.out.println(totalLoadingTime + "ms");
+        //System.out.println(totalLoadingTime + "ms");
         seconds = Math.round(totalLoadingTime) / 1000.0d;
         seconds = PingdomPagesMethods.round(seconds, 1);
-        System.out.println(seconds + "sec");
+        System.out.println(seconds + " sec");
+        System.out.println("-----------------------------------------------");
     }
 
     public void calculatePageSize(PingdomPages pp) {
         Double pageSize = Double.parseDouble(pp.getMb().getAttribute("textContent").replaceAll("[^0-9.]", ""));
-        System.out.println(pageSize);
+        System.out.println(pageSize + " MB");
     }
 
     public void calculatePerformanceLetter(Integer performanceGrade) {
@@ -122,10 +123,10 @@ public class PingdomPagesMethods {
         System.out.println(performanceLetter);
     }
 
-
+    @Deprecated
     public void calculatePerformanceGrade(PingdomPages pp) {
         Integer performanceGrade = Integer.parseInt(pp.getPerformanceGrade().getAttribute("textContent").replaceAll("\\D+", ""));//("innerHTML");
-        System.out.println(performanceGrade);
+        System.out.print(performanceGrade + " ");
     }
 
     public static double round(double value, int places) {

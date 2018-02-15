@@ -59,16 +59,17 @@ public class ArtemSites {
         sitsToArtem.add("http://www.autoexpostore.com/cars-for-sale.html");
         sitsToArtem.add(autoexpostoreVDurl);
 
-        /*driver.get("https://tools.pingdom.com/#!/");
-        ppm.getPingdomSitesParameters(sitsToArtem, artemPagesPingdom,pp, driver, "csvArtemPingdom",wait);*/
+        //--------------------PINGDOM--------------
+        driver.get("https://tools.pingdom.com/#!/");
+        ppm.getPingdomSitesParameters(sitsToArtem, artemPagesPingdom,pp, driver, "csvArtemPingdom",wait);
 
-        //-----------------
+        //-------------------GOOGLE Test My Site
         driver.get("https://testmysite.withgoogle.com/intl/en-gb");
         testMySitePages.getLoadingTime(sitsToArtem,driver,"csvArtemTestMySite");
-        //----------------
 
-        /*driver.get("https://developers.google.com/speed/pagespeed/insights/");
-        gm.getGoogleSitesParameters(sitsToArtem, artemPagesGooglePages, g, "csvArtemGoogle", pp, wait);*/
+        //-------------------GOOGLE Insights-------
+        driver.get("https://developers.google.com/speed/pagespeed/insights/");
+        gm.getGoogleSitesParameters(sitsToArtem, artemPagesGooglePages, g, "csvArtemGoogle", pp, wait);
     }
 }
 

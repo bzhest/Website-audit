@@ -29,7 +29,7 @@ public class VehicleDetailsPages {
     @FindBy(how = How.CSS, using = ".h4.text-primary.vehicle-title")
     private List<WebElement> eastcountypreowned;
 
-    @FindBy(how = How.CSS, using = ".h4.text-primary.vehicle-title")
+    @FindBy(how = How.CSS, using = ".vehicle-img-wrapper")
     private List<WebElement> zidocars;
 
     @FindBy(how = How.CSS, using = ".vehicle_title.inline.btn-link.h4")
@@ -144,7 +144,8 @@ public class VehicleDetailsPages {
         return carLink.get(0).getAttribute("href");
     }
 
-
+    /**By now Kingofcars website is unused*/
+@Deprecated
     public String getVDurlForKingofcars(WebDriver driver, String inventoryURL, String homeURL, List<WebElement> carLink) {
         driver.get(inventoryURL);
         String pass = driver.findElements(By.cssSelector(".vehicle_search_results_item")).get(0).findElements(By.tagName("a")).get(0).getAttribute("id");
