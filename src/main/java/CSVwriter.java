@@ -21,11 +21,11 @@ public class CSVwriter {
                 if (p.getUrl().contains("vid_")) {//String with "vid_" is Vehicle Details Page
                     int indexOfThirdSlash = StringUtils.ordinalIndexOf(p.getUrl(), "/", 3);
                     String cuttedUrl = p.getUrl().substring(0, indexOfThirdSlash);
-                    oneLine.append(counter++ + ") " + cuttedUrl + "/Vehicle_Details");
+                    oneLine.append(cuttedUrl + "/Vehicle_Details");
                 } else if (p.getUrl().contains("sitemap")) { // special for globalcarexchange - it may not have cars
-                    oneLine.append(counter++ + ") " + p.getUrl() + " - Site have no cars");
+                    oneLine.append(p.getUrl() + " - Site have no cars");
                 } else {
-                    oneLine.append(counter++ + ") " + p.getUrl());
+                    oneLine.append(p.getUrl());
                 }
                 oneLine.append(CSV_SEPARATOR);
                 oneLine.append("  " + p.getPerformGradeLetter());

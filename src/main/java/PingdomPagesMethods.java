@@ -1,28 +1,89 @@
+import com.codeborne.selenide.CollectionCondition;
+import com.codeborne.selenide.Configuration;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+
+import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.$$;
+
+import static com.codeborne.selenide.Selenide.open;
+import static com.codeborne.selenide.Selenide.screenshot;
 
 /**
  * Created by DWork on 19.05.2017.
  */
 public class PingdomPagesMethods {
 
-    PingdomPages pp = new PingdomPages();
-    WebDriver driver;
-    Integer performanceGrade;
-    String pageSize;
+    //PingdomPages pp = new PingdomPages();
+    //WebDriver driver;
+    //Integer performanceGrade;
+    //String pageSize;
     String performanceLetter;
     Double seconds;
 
 
     public void getPingdomSitesParameters(ArrayList<String> sites, ArrayList<PingdomPages> pingdomPage, PingdomPages pp, WebDriver driver, String csvFileName, WebDriverWait wait) {
+
+        for (String site : sites) {
+            wait.until(ExpectedConditions.visibilityOf(pp.getLocationDropdownDiv()));
+            inputSiteSelectCountry(pp, site);
+            tryToSelectAllPingdomPagesFields(driver, pp, site, wait);
+
+            calculatePerformanceGrade(pp);
+            calculatePerformanceLetter(getPerformanceGrade(pp));
+            calculatePageSize(pp);
+            calculateLoadTime(pp);
+            createPingdomPageObject(pingdomPage, site, pp);
+            writeToCSV(pingdomPage, csvFileName);
+        }
+    }
+
+    /*protected String currentTime(){
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        return sdf.format(new Date());
+    }*/
+
+    /*public void makePingdomScreenshot1(String site, WebDriver driver){
+        Actions act = new Actions(driver);
+        act.moveToElement(driver.findElement(By.cssSelector(".rbc-summary-group")));
+        act.perform();
+        screenshot(site + "1");
+    }
+*/
+
+/*public void makePingdomScreenshot2(String site, WebDriver driver){
+        Actions act = new Actions(driver);
+        act.moveToElement(driver.findElement(By.cssSelector(".table-general.table-perfinsights")));
+        act.perform();
+        screenshot(site + "2");
+    }*/
+    /*public void makeGtmetrixScreenshots(ArrayList<String> sites) {
+        Configuration.reportsFolder = "Screenshots/" + currentTime() + "/Gtmetrix";
+        for (String site : sites) {
+
+            open("https://gtmetrix.com/");
+            $(By.cssSelector("input[type = 'url']")).setValue("http://www.motortrader.co.za/toyota-for-sale-sa.html");
+            $(By.cssSelector("button[type = 'submit']")).click();
+            $("#username").waitUntil(visible, 5000);
+            $$(By.cssSelector("r-tabs-tab")).shouldHave(CollectionCondition.sizeGreaterThanOrEqual(0));
+            $$(By.cssSelector(".r-tabs-tab")).get(0).scrollTo();
+            screenshot(site);
+        }
+    }*/
+
+    public void getPingdomSitesParametersWriteExcel(ArrayList<String> sites, ArrayList<PingdomPages> pingdomPage, PingdomPages pp, WebDriver driver, String workBook, String sheet, WebDriverWait wait) {
         for (String site : sites) {
             wait.until(ExpectedConditions.visibilityOf(pp.getLocationDropdownDiv()));
             inputSiteSelectCountry(pp, site);
@@ -32,7 +93,7 @@ public class PingdomPagesMethods {
             calculatePageSize(pp);
             calculateLoadTime(pp);
             createPingdomPageObject(pingdomPage, site, pp);
-            writeToCSV(pingdomPage, csvFileName);
+            writeToExcel(pingdomPage, workBook, sheet);
         }
     }
 
@@ -85,6 +146,13 @@ public class PingdomPagesMethods {
         writer.writePingdomToCSV(pingdomPage, fileName);
     }
 
+    public void writeToExcel(ArrayList<PingdomPages> pingdomPage, String workBook, String sheet) {
+        JavaExcelApp excel = new JavaExcelApp();
+        excel.writePingdomToExcel(pingdomPage,workBook,sheet);
+    }
+
+
+
     public void createPingdomPageObject(ArrayList<PingdomPages> pingdomPage, String site, PingdomPages pp) {
         pingdomPage.add(new PingdomPages(site, getPerformanceLetter(getPerformanceGrade(pp)), getPerformanceGrade(pp), getPageSize(pp), getSeconds(pp)));
         //System.out.println(pingdomPage);
@@ -123,7 +191,7 @@ public class PingdomPagesMethods {
         System.out.println(performanceLetter);
     }
 
-    @Deprecated
+
     public void calculatePerformanceGrade(PingdomPages pp) {
         Integer performanceGrade = Integer.parseInt(pp.getPerformanceGrade().getAttribute("textContent").replaceAll("\\D+", ""));//("innerHTML");
         System.out.print(performanceGrade + " ");
@@ -199,6 +267,8 @@ public class PingdomPagesMethods {
             tryToSelectAllPingdomPagesFields(driver, pp, site, wait);
         }
     }
+
+
 }
 
 

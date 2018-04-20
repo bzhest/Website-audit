@@ -41,6 +41,16 @@
             <artifactId>webdriver-factory</artifactId>
             <version>3.0</version>
         </dependency>
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi</artifactId>
+            <version>3.17</version>
+        </dependency>
+        <dependency>
+            <groupId>com.codeborne</groupId>
+            <artifactId>selenide</artifactId>
+            <version>4.11.1</version>
+        </dependency>
     </dependencies>
 
 

@@ -33,8 +33,8 @@ public class ArtemSites {
         String supertiresonlineVDurl = vdp.getVDurl(driver,"http://supertiresonline.com/shop-tires-tampa-clearwater.html", vdp.getSupertiresonline());
         String globalcarexchangeVDurl = vdp.getVDurl(driver, "https://www.globalcarexchange.com/cars-for-sale.html", vdp.getGlobalcarexchange());
         String wallworktrucksVDurl = vdp.getVDurl(driver, "http://www.wallworktrucks.com/trucks-for-sale-inventory.html", vdp.getWallworktrucks());
-        String tmxwholesaleVDurl = vdp.getVDurl(driver, "https://www.tmxwholesale.com/cars-for-sale.html", vdp.getTMX());
-        String autoexpostoreVDurl = vdp.getVDurl(driver,"http://www.autoexpostore.com/cars-for-sale.html", vdp.getAutoexpostore());
+        //String tmxwholesaleVDurl = vdp.getVDurl(driver, "https://www.tmxwholesale.com/cars-for-sale.html", vdp.getTMX());
+        //String autoexpostoreVDurl = vdp.getVDurl(driver,"http://www.autoexpostore.com/cars-for-sale.html", vdp.getAutoexpostore());
 
 
 
@@ -52,12 +52,12 @@ public class ArtemSites {
         sitsToArtem.add(supertiresonlineVDurl);
         //sitsToArtem.add("http://uvlrx.com/");
         sitsToArtem.add("https://www.autoxloo.com/");
-        sitsToArtem.add("https://www.tmxwholesale.com/");
+        /*sitsToArtem.add("https://www.tmxwholesale.com/");
         sitsToArtem.add("https://www.tmxwholesale.com/cars-for-sale.html");
-        sitsToArtem.add(tmxwholesaleVDurl);
-        sitsToArtem.add("http://www.autoexpostore.com");
+        sitsToArtem.add(tmxwholesaleVDurl);*/
+        /*sitsToArtem.add("http://www.autoexpostore.com");
         sitsToArtem.add("http://www.autoexpostore.com/cars-for-sale.html");
-        sitsToArtem.add(autoexpostoreVDurl);
+        sitsToArtem.add(autoexpostoreVDurl);*/
 
         //--------------------PINGDOM--------------
         driver.get("https://tools.pingdom.com/#!/");

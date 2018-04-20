@@ -36,6 +36,9 @@ public class GooglePages {
     @FindBy(how = How.CSS,using = ".url")
     private WebElement urlInput;
 
+    @FindBy(how = How.CSS,using = ".captcha-faq-link")
+    public List <WebElement> captcha;
+
     @FindBy(how = How.CSS,using = ".button.button-red.analyze")
     private WebElement buttonAnalize;
 
