@@ -32,9 +32,9 @@ public class CSVwriter {
                 //oneLine.append(CSV_SEPARATOR);
                 oneLine.append(p.getPerformGradeNumber());
                 oneLine.append(CSV_SEPARATOR);
-                oneLine.append(p.getMbValue() + " MB");
+                oneLine.append(String.valueOf(p.getMbValue()).replaceAll(".",",") + " MB");
                 oneLine.append(CSV_SEPARATOR);
-                oneLine.append(p.getSecValue() + " Sec");
+                oneLine.append(String.valueOf(p.getSecValue()).replaceAll(".",",") + " Sec");
                 bw.write(oneLine.toString());
                 bw.newLine();
             }

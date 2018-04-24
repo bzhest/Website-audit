@@ -1,13 +1,10 @@
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
-import org.openqa.selenium.support.ui.ExpectedCondition;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
+
 
 import java.util.List;
 
-import static com.codeborne.selenide.Selenide.open;
 
 /**
  * Created by Andrey on 17.05.2017.
@@ -140,8 +137,6 @@ public class VehicleDetailsPages {
 
     public String getVDurl(WebDriver driver, String inventoryURL, List<WebElement> carLink) {
         driver.get(inventoryURL);
-        //Screenshoter.takeSnapShot(driver,"Screenshots/Pingdom.png" );
-        //open(inventoryURL);
         return carLink.get(0).getAttribute("href");
     }
 

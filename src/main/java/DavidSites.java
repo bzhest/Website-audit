@@ -1,6 +1,5 @@
 
-import com.codeborne.selenide.Configuration;
-import com.codeborne.selenide.WebDriverRunner;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.PageFactory;
@@ -11,8 +10,8 @@ import PingdomPages;*/
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
-import static com.codeborne.selenide.Configuration.AssertionMode.STRICT;
-import static com.codeborne.selenide.Selenide.open;
+import static com.codeborne.selenide.Selenide.page;
+
 
 /**
  * Created by Andrey on 17.05.2017.
@@ -31,18 +30,14 @@ public class DavidSites {
 
 
     public static void main(String[] args) {
-        /*Configuration.browser = "chrome";
-        Configuration.timeout = 10000;
-        Configuration.pageLoadStrategy = "normal";
-        Configuration.assertionMode = STRICT;*/
-        driver = new ChromeDriver();
 
+        driver = new ChromeDriver();
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
         WebDriverWait wait = new WebDriverWait(driver, 50);
         GooglePageMethods gm = new GooglePageMethods();
-        PingdomPages pp = PageFactory.initElements(driver, PingdomPages.class);
         GooglePages g = PageFactory.initElements(driver, GooglePages.class);
+        PingdomPages pp = PageFactory.initElements(driver, PingdomPages.class);
         VehicleDetailsPages vdp = PageFactory.initElements(driver, VehicleDetailsPages.class);
         //PingdomPagesMethods ppm = new PingdomPagesMethods();
         PingdomPagesMethods ppm = PageFactory.initElements(driver, PingdomPagesMethods.class);
@@ -55,9 +50,7 @@ public class DavidSites {
         String eastcountypreownedVDurl = vdp.getVDurl(driver, "http://www.eastcountypreowned.com/cars-for-sale.html", vdp.getEastcountypreowned());
         String zidocarsVDurl = vdp.getVDurl(driver, "http://www.zidocars.co.za/cars-for-sale.html", vdp.getZidocars());
         String genuinemotorcarsVDurl = vdp.getVDurl(driver, "http://www.genuinemotorcars.com/cars-for-sale.html", vdp.getGenuinemotorcars());
-
         //String tmxwholesaleVDurl = vdp.getVDurl(driver, "https://www.tmxwholesale.com/cars-for-sale.html", vdp.getTMX());
-
         String kenworthnorthwestVDurl = vdp.getVDurl(driver, "http://www.kenworthnorthwest.com/trucks-for-sale_condition_2.html", vdp.getKenworthnorthwest());
         String auctiondemoVDurl = vdp.getVDurl(driver, "http://www.auctiondemo.ixloo.com/presaleinventory", vdp.getAuctiondemo());
         String globalcarexchangeVDurl = vdp.getVDurl(driver, "https://www.globalcarexchange.com/cars-for-sale.html", vdp.getGlobalcarexchange());
@@ -83,11 +76,9 @@ public class DavidSites {
         sitsToDavid.add("http://www.genuinemotorcars.com/");
         sitsToDavid.add("http://www.genuinemotorcars.com/cars-for-sale.html");
         sitsToDavid.add(genuinemotorcarsVDurl);
-
         sitsToDavid.add("https://www.tmxwholesale.com/");
         sitsToDavid.add("https://www.tmxwholesale.com/cars-for-sale.html");
         //sitsToDavid.add(tmxwholesaleVDurl);
-
         sitsToDavid.add("http://www.kenworthnorthwest.com/");
         sitsToDavid.add("http://www.kenworthnorthwest.com/trucks-for-sale_condition_2.html");
         sitsToDavid.add(kenworthnorthwestVDurl);
@@ -109,14 +100,17 @@ public class DavidSites {
         //ppm.getPingdomSitesParametersWriteExcel(sitsToDavid, davidPagesPingdom, pp, driver, workbookExcel, sheetDavidPingdom, wait);
 
 
+        //-------------------GTMETRIX - screenshots-----
+        //new JtmetrixMethods().makeGtmetrixScreenshots(sitsToDavid,driver, wait);
+
         //------------------GOOGLE Test My Site--------
-        /*driver.get("https://testmysite.withgoogle.com/intl/en-gb");
-        testMySitePages.getLoadingTime(sitsToDavid,driver,"csvDavidTestMySite"); // for csv file*/
+        driver.get("https://testmysite.withgoogle.com/intl/en-gb");
+        testMySitePages.getLoadingTime(sitsToDavid,driver,"csvDavidTestMySite"); // for csv file
         //testMySitePages.getLoadingTimeToExcel(sitsToDavid,driver,workbookExcel,sheetDavidTestMySite);
 
         //-------------------GOOGLE Insights----------
-        driver.get("https://developers.google.com/speed/pagespeed/insights/");
-        gm.getGoogleSitesParameters(sitsToDavid, davidPagesGooglePages, g, "csvDavidGoogle", pp, wait); // for csv file
+        /*driver.get("https://developers.google.com/speed/pagespeed/insights/");
+        gm.getGoogleSitesParameters(sitsToDavid, davidPagesGooglePages, g, "csvDavidGoogle", pp, wait); // for csv file*/
         //gm.getGoogleSitesParameterstoExcel(sitsToDavid, davidPagesGooglePages, g, workbookExcel, sheetDavidGoogle, pp, wait);
     }
 

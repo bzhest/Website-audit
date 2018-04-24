@@ -21,7 +21,7 @@ public class ArtemSites {
         WebDriver driver = new ChromeDriver();
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-        WebDriverWait wait = new WebDriverWait(driver, 50);
+        WebDriverWait wait = new WebDriverWait(driver, 70);
         GooglePageMethods gm = new GooglePageMethods();
         PingdomPages pp = PageFactory.initElements(driver, PingdomPages.class);
         VehicleDetailsPages vdp = PageFactory.initElements(driver, VehicleDetailsPages.class);
@@ -52,26 +52,31 @@ public class ArtemSites {
         sitsToArtem.add(supertiresonlineVDurl);
         //sitsToArtem.add("http://uvlrx.com/");
         sitsToArtem.add("https://www.autoxloo.com/");
-        /*sitsToArtem.add("https://www.tmxwholesale.com/");
+        sitsToArtem.add("https://www.tmxwholesale.com/");
         sitsToArtem.add("https://www.tmxwholesale.com/cars-for-sale.html");
-        sitsToArtem.add(tmxwholesaleVDurl);*/
+        //sitsToArtem.add(tmxwholesaleVDurl);
         /*sitsToArtem.add("http://www.autoexpostore.com");
         sitsToArtem.add("http://www.autoexpostore.com/cars-for-sale.html");
         sitsToArtem.add(autoexpostoreVDurl);*/
 
         //--------------------PINGDOM--------------
-        driver.get("https://tools.pingdom.com/#!/");
-        ppm.getPingdomSitesParameters(sitsToArtem, artemPagesPingdom,pp, driver, "csvArtemPingdom",wait);
+        /*driver.get("https://tools.pingdom.com/#!/");
+        ppm.getPingdomSitesParameters(sitsToArtem, artemPagesPingdom,pp, driver, "csvArtemPingdom",wait);*/
+
+        //-------------------GTMETRIX - screenshots-----
+        new JtmetrixMethods().makeGtmetrixScreenshots(sitsToArtem,driver, wait);
+
+        //-------------------GOOGLE Insights-------
+        driver.get("https://developers.google.com/speed/pagespeed/insights/");
+        gm.getGoogleSitesParameters(sitsToArtem, artemPagesGooglePages, g, "csvArtemGoogle", pp, wait);
+
 
         //-------------------GOOGLE Test My Site
         driver.get("https://testmysite.withgoogle.com/intl/en-gb");
         testMySitePages.getLoadingTime(sitsToArtem,driver,"csvArtemTestMySite");
 
-        //-------------------GOOGLE Insights-------
-        driver.get("https://developers.google.com/speed/pagespeed/insights/");
-        gm.getGoogleSitesParameters(sitsToArtem, artemPagesGooglePages, g, "csvArtemGoogle", pp, wait);
+        }
     }
-}
 
 /*String globalcarexchangeVDurl = "";
         try{

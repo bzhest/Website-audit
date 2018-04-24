@@ -1,5 +1,3 @@
-import com.codeborne.selenide.CollectionCondition;
-import com.codeborne.selenide.Configuration;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -11,64 +9,76 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
-
-import static com.codeborne.selenide.Condition.visible;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.$$;
-
-import static com.codeborne.selenide.Selenide.open;
-import static com.codeborne.selenide.Selenide.screenshot;
 
 /**
  * Created by DWork on 19.05.2017.
  */
 public class PingdomPagesMethods {
 
-    //PingdomPages pp = new PingdomPages();
-    //WebDriver driver;
-    //Integer performanceGrade;
-    //String pageSize;
+    private final String PINGDOM_SCREENSHOTS_PATH = "Screenshots/" + currentTime() + "/Pingdom/sites/";
     String performanceLetter;
     Double seconds;
+    Integer performanceGrade;
+    Double pageSize;
 
 
     public void getPingdomSitesParameters(ArrayList<String> sites, ArrayList<PingdomPages> pingdomPage, PingdomPages pp, WebDriver driver, String csvFileName, WebDriverWait wait) {
 
         for (String site : sites) {
-            wait.until(ExpectedConditions.visibilityOf(pp.getLocationDropdownDiv()));
-            inputSiteSelectCountry(pp, site);
-            tryToSelectAllPingdomPagesFields(driver, pp, site, wait);
+            List<Integer> performanceGradeList = new ArrayList<>();
+            List<Double> pageSizeList = new ArrayList<>();
+            List<Double> loadTimeList = new ArrayList<>();
+            for(int i = 0; i <3; i++) {
 
-            calculatePerformanceGrade(pp);
-            calculatePerformanceLetter(getPerformanceGrade(pp));
-            calculatePageSize(pp);
-            calculateLoadTime(pp);
-            createPingdomPageObject(pingdomPage, site, pp);
+                wait.until(ExpectedConditions.visibilityOf(pp.getLocationDropdownDiv()));
+                inputSiteSelectCountry(pp, site);
+                tryToSelectAllPingdomPagesFields(driver, pp, site, wait);
+                performanceGradeList.add(calculatePerformanceGrade(pp));
+                calculatePerformanceLetter(getPerformanceGrade(pp));
+                pageSizeList.add(calculatePageSize(pp));
+                loadTimeList.add(calculateLoadTime(pp));
+
+                makePingdomScreenshot(site,driver);
+                scrollToPingdomTable(driver);
+                makePingdomScreenshot(site,driver);
+            }
+            Integer maxPerformanceGrade = Collections.max(performanceGradeList);
+            System.out.print("Best grades result: " + maxPerformanceGrade + " ");
+            String maxPerformanceLetter = calculatePerformanceLetter(maxPerformanceGrade);
+            //System.out.println("Result " + maxPerformanceLetter);
+            Double maxPageSize = Collections.max(pageSizeList);
+            System.out.println("Best weight result:  " + maxPageSize + " MB");
+            Double minPageSeconds = Collections.min(loadTimeList);
+            System.out.println("Best time result: " + minPageSeconds + " sec");
+            System.out.println("***********************************************");
+            pingdomPage.add(new PingdomPages(site, maxPerformanceLetter, maxPerformanceGrade, maxPageSize, minPageSeconds));
             writeToCSV(pingdomPage, csvFileName);
         }
     }
 
-    /*protected String currentTime(){
+    protected String currentTime(){
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         return sdf.format(new Date());
-    }*/
+    }
 
-    /*public void makePingdomScreenshot1(String site, WebDriver driver){
+    public void makePingdomScreenshot(String site, WebDriver driver){
         Actions act = new Actions(driver);
         act.moveToElement(driver.findElement(By.cssSelector(".rbc-summary-group")));
         act.perform();
-        screenshot(site + "1");
+        String siteWithoutSlash = site.replaceAll("[./:]","_");
+        String siteName = siteWithoutSlash.substring(siteWithoutSlash.indexOf("www_")+4);
+        Screenshoter.takeSnapShot(driver, PINGDOM_SCREENSHOTS_PATH + siteName + ".png");
     }
-*/
 
-/*public void makePingdomScreenshot2(String site, WebDriver driver){
+        public void scrollToPingdomTable(WebDriver driver){
         Actions act = new Actions(driver);
         act.moveToElement(driver.findElement(By.cssSelector(".table-general.table-perfinsights")));
         act.perform();
-        screenshot(site + "2");
-    }*/
+    }
+
     /*public void makeGtmetrixScreenshots(ArrayList<String> sites) {
         Configuration.reportsFolder = "Screenshots/" + currentTime() + "/Gtmetrix";
         for (String site : sites) {
@@ -97,17 +107,19 @@ public class PingdomPagesMethods {
         }
     }
 
-    public String getPageSize(PingdomPages pp) {
+    public Double getPageSize(PingdomPages pp) {
 
         Double loadNumber = Double.parseDouble(pp.getMb().getAttribute("textContent").replaceAll("[^0-9.]", ""));
 
         //if it KB - cast it to MB (like from 238.1 KB to 0.2 MB )
         if(pp.getMb().getText().contains("MB")){
-            return String.valueOf(loadNumber).replace('.',',');
+            String result =  String.valueOf(loadNumber).replace('.',',');
+            return Double.parseDouble(result);
         }else{
             Double mb = Math.round(loadNumber) / 1000.0d;
             mb = PingdomPagesMethods.round(mb, 1);
-            return String.valueOf(mb).replace('.',',');
+            String result1 =   String.valueOf(mb).replace('.',',');
+            return Double.parseDouble(result1);
         }
     }
 
@@ -129,7 +141,7 @@ public class PingdomPagesMethods {
         return performanceLetter;
     }
 
-    public String getSeconds(PingdomPages pp) {
+    public Double getSeconds(PingdomPages pp) {
         List<WebElement> partLoadings = pp.getSec().get(0).findElements(By.xpath(".//*"));
         int totalLoadingTime = 0;
         for (WebElement w : partLoadings) {
@@ -138,7 +150,8 @@ public class PingdomPagesMethods {
         }
         seconds = Math.round(totalLoadingTime) / 1000.0d;
         seconds = PingdomPagesMethods.round(seconds, 1);
-        return String.valueOf(seconds).replace('.',',');
+        String sec =  String.valueOf(seconds).replace('.',',');
+        return Double.parseDouble(sec);
     }
 
     public void writeToCSV(ArrayList<PingdomPages> pingdomPage, String fileName) {
@@ -158,26 +171,41 @@ public class PingdomPagesMethods {
         //System.out.println(pingdomPage);
     }
 
-    public void calculateLoadTime(PingdomPages pp) {
+    public Double calculateLoadTime(PingdomPages pp) {
         List<WebElement> partLoadings = pp.getSec().get(0).findElements(By.xpath(".//*"));
-        int totalLoadingTime = 0;
+        Double totalLoadingTime = 0.0;
         for (WebElement w : partLoadings) {
             int loadingTime = Integer.parseInt(w.getAttribute("textContent").replaceAll("\\D+", ""));
             totalLoadingTime += loadingTime;
+            //totalLoadingTime.doubleValue();
         }
         //System.out.println(totalLoadingTime + "ms");
         seconds = Math.round(totalLoadingTime) / 1000.0d;
         seconds = PingdomPagesMethods.round(seconds, 1);
         System.out.println(seconds + " sec");
         System.out.println("-----------------------------------------------");
+        return seconds;
     }
 
-    public void calculatePageSize(PingdomPages pp) {
+    public Double calculatePageSize(PingdomPages pp) {
         Double pageSize = Double.parseDouble(pp.getMb().getAttribute("textContent").replaceAll("[^0-9.]", ""));
+        pageSize = returnSizeInMb(pageSize);//количество цифр перед точкой 3 -> делим на 1000 число)
         System.out.println(pageSize + " MB");
+        return pageSize;
     }
 
-    public void calculatePerformanceLetter(Integer performanceGrade) {
+    private Double returnSizeInMb(Double pageSize){
+        String [] parts = String.valueOf(pageSize).split(".");
+        int digitsNumberBeforePoint = parts[0].toCharArray().length;
+        if(digitsNumberBeforePoint>2){
+            return round(pageSize/1000d, 1);
+        }else{
+            return pageSize;
+        }
+    }
+
+
+    public String calculatePerformanceLetter(Integer performanceGrade) {
         performanceLetter = "";
         if (performanceGrade >= 90) {
             performanceLetter += "A";
@@ -189,12 +217,14 @@ public class PingdomPagesMethods {
             performanceLetter += "D";
         }
         System.out.println(performanceLetter);
+        return performanceLetter;
     }
 
 
-    public void calculatePerformanceGrade(PingdomPages pp) {
+    public Integer calculatePerformanceGrade(PingdomPages pp) {
         Integer performanceGrade = Integer.parseInt(pp.getPerformanceGrade().getAttribute("textContent").replaceAll("\\D+", ""));//("innerHTML");
         System.out.print(performanceGrade + " ");
+        return performanceGrade;
     }
 
     public static double round(double value, int places) {

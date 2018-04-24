@@ -19,24 +19,21 @@ public class PingdomPages {
 
     private String performGradeLetter;
     private Integer performGradeNumber;
-    private String mbValue;
-    private String secValue;
-    private WebDriver driver;
+    private Double mbValue;
+    private Double secValue;
     private String url;
 
 
 
-    public PingdomPages(String url, String performGradeLetter, Integer performGradeNumber, String mbValue, String secValue){
+    public PingdomPages(String url, String performGradeLetter, Integer performGradeNumber, Double mbValue, Double secValue){
         this.performGradeLetter = performGradeLetter;
         this.performGradeNumber = performGradeNumber;
         this.mbValue = mbValue;
         this.secValue = secValue;
         this.url = url;
-
     }
 
     public PingdomPages(){}
-
 
 
     @FindBy(how = How.CSS,using = "#urlinput")
@@ -87,8 +84,8 @@ public class PingdomPages {
     public Integer getPerformGradeNumber() {
         return performGradeNumber;
     }
-    public String getMbValue() {return mbValue;}
-    public String getSecValue() {
+    public Double getMbValue() {return mbValue;}
+    public Double getSecValue() {
         return secValue;
     }
     public List<WebElement> getSec() {return sec;}
