@@ -32,9 +32,9 @@ public class CSVwriter {
                 //oneLine.append(CSV_SEPARATOR);
                 oneLine.append(p.getPerformGradeNumber());
                 oneLine.append(CSV_SEPARATOR);
-                oneLine.append(String.valueOf(p.getMbValue()).replaceAll(".",",") + " MB");
+                oneLine.append(String.valueOf(p.getMbValue()).replaceAll("\\.",",") + " MB");
                 oneLine.append(CSV_SEPARATOR);
-                oneLine.append(String.valueOf(p.getSecValue()).replaceAll(".",",") + " Sec");
+                oneLine.append(String.valueOf(p.getSecValue()).replaceAll("\\.",",") + " Sec");
                 bw.write(oneLine.toString());
                 bw.newLine();
             }
@@ -55,11 +55,11 @@ public class CSVwriter {
                 if (g.getUrl().contains("vid_")) {//String with "vid_" is Vehicle Details Page
                     int indexOfThirdSlash = StringUtils.ordinalIndexOf(g.getUrl(), "/", 3);
                     String cuttedUrl = g.getUrl().substring(0, indexOfThirdSlash);
-                    oneLine.append(counter++ + ") " + cuttedUrl + "/Vehicle_Details");
+                    oneLine.append(cuttedUrl + "/Vehicle_Details");
                 } else if (g.getUrl().contains("sitemap")) { // special for globalcarexchange - it may not have cars
-                    oneLine.append(counter++ + ") " + g.getUrl() + " - Site have no cars");
+                    oneLine.append(g.getUrl() + " - Site have no cars");
                 } else {
-                    oneLine.append(counter++ + ") " + g.getUrl());
+                    oneLine.append(g.getUrl());
                 }
                 oneLine.append(CSV_SEPARATOR);
                 oneLine.append("" + g.getMobileValue());

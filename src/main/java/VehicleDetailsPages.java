@@ -25,7 +25,7 @@ public class VehicleDetailsPages {
     @FindBy(how = How.CSS, using = ".h4.text-primary.vehicle-title")
     private List<WebElement> eastcountypreowned;
 
-    @FindBy(how = How.CSS, using = ".vehicle-img-wrapper")
+    @FindBy(how = How.CSS, using = ".title-wrap .text-primary")
     private List<WebElement> zidocars;
 
     @FindBy(how = How.CSS, using = ".vehicle_title.inline.btn-link.h4")

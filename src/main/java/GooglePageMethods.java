@@ -38,7 +38,7 @@ public class GooglePageMethods {
             String maxMobile = Collections.max(mobileList).toString();
             System.out.println("Best mobile result: " + maxMobile);
             String maxDesctop = Collections.max(desctopList).toString();
-            System.out.println("Best desctop result: " + maxDesctop);
+            System.out.println("Best desktop result: " + maxDesctop);
             System.out.println("-----------------------------------------------------");
             googlePages.add(new GooglePages(site, maxMobile, maxDesctop));
             writeToCSV(googlePages,csvFileName);

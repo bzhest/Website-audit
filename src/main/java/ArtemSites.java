@@ -52,16 +52,16 @@ public class ArtemSites {
         sitsToArtem.add(supertiresonlineVDurl);
         //sitsToArtem.add("http://uvlrx.com/");
         sitsToArtem.add("https://www.autoxloo.com/");
-        sitsToArtem.add("https://www.tmxwholesale.com/");
+        /*sitsToArtem.add("https://www.tmxwholesale.com/");
         sitsToArtem.add("https://www.tmxwholesale.com/cars-for-sale.html");
-        //sitsToArtem.add(tmxwholesaleVDurl);
+        sitsToArtem.add(tmxwholesaleVDurl);*/
         /*sitsToArtem.add("http://www.autoexpostore.com");
         sitsToArtem.add("http://www.autoexpostore.com/cars-for-sale.html");
         sitsToArtem.add(autoexpostoreVDurl);*/
 
         //--------------------PINGDOM--------------
-        /*driver.get("https://tools.pingdom.com/#!/");
-        ppm.getPingdomSitesParameters(sitsToArtem, artemPagesPingdom,pp, driver, "csvArtemPingdom",wait);*/
+        driver.get("https://tools.pingdom.com/#!/");
+        ppm.getPingdomSitesParameters(sitsToArtem, artemPagesPingdom,pp, driver, "csvArtemPingdom",wait);
 
         //-------------------GTMETRIX - screenshots-----
         new JtmetrixMethods().makeGtmetrixScreenshots(sitsToArtem,driver, wait);

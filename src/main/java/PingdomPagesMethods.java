@@ -195,7 +195,7 @@ public class PingdomPagesMethods {
     }
 
     private Double returnSizeInMb(Double pageSize){
-        String [] parts = String.valueOf(pageSize).split(".");
+        String [] parts = String.valueOf(pageSize).split("\\.");
         int digitsNumberBeforePoint = parts[0].toCharArray().length;
         if(digitsNumberBeforePoint>2){
             return round(pageSize/1000d, 1);

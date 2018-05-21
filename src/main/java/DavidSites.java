@@ -1,16 +1,15 @@
-
-
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
-/*import GooglePages;
-import PingdomPages;*/
 
+import javax.script.ScriptEngine;
+import javax.script.ScriptEngineManager;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
-import static com.codeborne.selenide.Selenide.page;
+import javax.script.*;
 
 
 /**
@@ -61,6 +60,7 @@ public class DavidSites {
         sitsToDavid.add("http://www.theeuropeanmasters.com/cars-for-sale.html");
         sitsToDavid.add(theeuropeanmastersVDurl);*/
 
+
         sitsToDavid.add("http://www.inspectacargezina.co.za/");
         sitsToDavid.add("http://www.inspectacargezina.co.za/cars-for-sale.html");
         sitsToDavid.add(inspectacargezinaVDurl);
@@ -76,8 +76,8 @@ public class DavidSites {
         sitsToDavid.add("http://www.genuinemotorcars.com/");
         sitsToDavid.add("http://www.genuinemotorcars.com/cars-for-sale.html");
         sitsToDavid.add(genuinemotorcarsVDurl);
-        sitsToDavid.add("https://www.tmxwholesale.com/");
-        sitsToDavid.add("https://www.tmxwholesale.com/cars-for-sale.html");
+        /*sitsToDavid.add("https://www.tmxwholesale.com/");
+        sitsToDavid.add("https://www.tmxwholesale.com/cars-for-sale.html");*/
         //sitsToDavid.add(tmxwholesaleVDurl);
         sitsToDavid.add("http://www.kenworthnorthwest.com/");
         sitsToDavid.add("http://www.kenworthnorthwest.com/trucks-for-sale_condition_2.html");
@@ -94,6 +94,7 @@ public class DavidSites {
         sitsToDavid.add("https://advancedregenerativeorthopedics.com/");
 
 
+
         //--------------------PINGDOM--------------
         driver.get("https://tools.pingdom.com/#!/");
         ppm.getPingdomSitesParameters(sitsToDavid, davidPagesPingdom, pp, driver, workbookCsv, wait); // for csv file
@@ -101,17 +102,19 @@ public class DavidSites {
 
 
         //-------------------GTMETRIX - screenshots-----
-        //new JtmetrixMethods().makeGtmetrixScreenshots(sitsToDavid,driver, wait);
+        new JtmetrixMethods().makeGtmetrixScreenshots(sitsToDavid, driver, wait);
+
+
+        //-------------------GOOGLE Insights----------
+        driver.get("https://developers.google.com/speed/pagespeed/insights/");
+        gm.getGoogleSitesParameters(sitsToDavid, davidPagesGooglePages, g, "csvDavidGoogle", pp, wait); // for csv file
+        //gm.getGoogleSitesParameterstoExcel(sitsToDavid, davidPagesGooglePages, g, workbookExcel, sheetDavidGoogle, pp, wait);
 
         //------------------GOOGLE Test My Site--------
         driver.get("https://testmysite.withgoogle.com/intl/en-gb");
-        testMySitePages.getLoadingTime(sitsToDavid,driver,"csvDavidTestMySite"); // for csv file
+        testMySitePages.getLoadingTime(sitsToDavid,driver,"csvDavidTestMySite");// for csv file
         //testMySitePages.getLoadingTimeToExcel(sitsToDavid,driver,workbookExcel,sheetDavidTestMySite);
 
-        //-------------------GOOGLE Insights----------
-        /*driver.get("https://developers.google.com/speed/pagespeed/insights/");
-        gm.getGoogleSitesParameters(sitsToDavid, davidPagesGooglePages, g, "csvDavidGoogle", pp, wait); // for csv file*/
-        //gm.getGoogleSitesParameterstoExcel(sitsToDavid, davidPagesGooglePages, g, workbookExcel, sheetDavidGoogle, pp, wait);
     }
 
 }
